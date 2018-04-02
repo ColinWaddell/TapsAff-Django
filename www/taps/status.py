@@ -1,0 +1,2 @@
+OAN = "oan"
+AFF = "aff"
