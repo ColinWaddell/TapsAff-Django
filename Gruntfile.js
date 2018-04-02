@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         sass: {
             dist: {
                 files: {
-                    'www/static/css/schedule.css': 'www/static/sass/manifest.scss',
+                    'www/static/css/tapsaff.css': 'www/static/sass/manifest.scss',
                 }
             }
         },

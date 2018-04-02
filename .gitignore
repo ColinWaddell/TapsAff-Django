@@ -3,13 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 db.sqlite3
-media/
-filemanager/migrations
-schedule/migrations
-schedule/static/js/expressway.js
-schedule/static/css/
-schedule/static/css/simplemde.css
-schedule/static/css/dropzone.css
+www/static/css/
 /static/
 *-lock.json
 *.map
