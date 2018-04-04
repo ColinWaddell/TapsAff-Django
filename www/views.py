@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 
 from .taps import forecast
@@ -11,5 +11,5 @@ class Index(View):
         return render(request, 'tapsaff.html', weather)
     
     def post(self, request):
-        weather = forecast.query(request.POST["location"])
-        return render(request, 'tapsaff.html', weather)
+        location = request.POST["location"]
+        return redirect("www:index", location=location)

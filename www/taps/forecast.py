@@ -141,6 +141,12 @@ def query(location):
     forecast_raw = _grab_forecast_data(location)
     forecast = _decode_forecast(forecast_raw)
 
+    # Need to try a location
+    # and if a place error
+    # occurs then retry with
+    # a cookie or default
+    # to Glasgow
+
     # Grab the weather
     return forecast
 
