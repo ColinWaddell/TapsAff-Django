@@ -1,13 +1,16 @@
 from json import loads
 from urllib.request import urlopen
 from urllib.parse import quote_plus
-from settings import URL
-from status import AFF, OAN
 
-from datetime import datetime, time
+from www.models import Weather, Settings
+from .settings import URL
+from .status import AFF, OAN
+
+from django.utils.timezone import datetime
 
 
 F_TO_C = lambda f: (f-32.0) * (5.0 / 9.0)
+CONFIG = lambda: Settings.objects.first()
 
 
 class TapsLocationError(Exception):
@@ -22,7 +25,7 @@ def _build_query(location):
     return URL.replace("LOCATION", quote_plus(location))
 
 
-def _grab_forecast(location):
+def _grab_forecast_data(location):
     # Grab the forecast
     query_url = _build_query(location)
     url = urlopen(query_url)
@@ -30,19 +33,48 @@ def _grab_forecast(location):
     return forecast
 
 
+def _build_future_forecast(forecast):
+    data = [
+        {
+            "code": int(daycast["code"]),
+            "temp_high_f" : float(daycast["high"]),
+            "temp_high_c": F_TO_C(float(daycast["high"])),
+            "temp_low_f_": float(daycast["low"]),
+            "temp_low_f": F_TO_C(float(daycast["low"])),
+            "taps": _test_taps_aff(daycast["code"], float(daycast["high"])),
+            "datetime": str(daycast["date"])
+        }
+        for daycast in forecast
+    ]
+    return data
+
+
 def _test_taps_aff(code, temp_f):
     # test terrible list: oan
     # test if greater than temp: aff
     # test elif close to boundary: oan
     # must be oan
-    return {
-        'status': AFF if temp_f > 62 else OAN,
-        'message': "hello"
+    taps = {
+        'status': OAN,
+        'message': ""
     }
+
+    if not Weather.objects.filter(code=code, terrible=True).count:
+        theshold = CONFIG.threshold
+        if temp_f > theshold:
+            taps["status"] = AFF
+        elif temp_f + 5 > theshold:
+            taps["message"] = "...but only by a bawhair!"
+    
+    return taps
 
 
 def _get_description(code):
-    return "blah"
+    weather = Weather.objects.get(code=int(code))
+    return {
+        "description": weather.description,
+        "scots": weather.scots
+    }
 
 
 def _is_daytime(astronomy):
@@ -56,17 +88,18 @@ def _is_daytime(astronomy):
 def _decode_forecast(raw):
     # The packet we need to return
     weather = {
-        'temp_f': "$temp_f",
-        'temp_c': "$temp_c",
-        'code': "$weather_code",
-        'taps': "$taps_status['status']",
+        'temp_f': 0,
+        'temp_c': 0,
+        'code': -1,
+        'taps': {},
+        'aff': False,
         'message': "$taps_status['message']",
         'description': "$weather_description",
-        'datetime': "$current_datetime->format('Y-m-d H:i:s')",
+        'datetime': str(datetime.now()),
         'location': "$location",
         'daytime': "$daytime",
         'place_error': "(isset($place_error) ? $place_error : '')",
-        'forecast': "$forecast"
+        'forecast': []
     }
 
     # Test if we've got a valid location
@@ -83,15 +116,20 @@ def _decode_forecast(raw):
         except KeyError:
             forecast = raw["query"]["results"]["channel"]
             
-        weather["temp_f"] = int(forecast["wind"]["chill"])
+        # Stats
+        weather["code"] = int(forecast["item"]["condition"]["code"])
+        weather["temp_f"] = float(forecast["wind"]["chill"])
         weather["temp_c"] = F_TO_C(weather["temp_f"])
         weather["location"] = forecast["location"]["city"]
-        weather["code"] = int(forecast["item"]["condition"]["code"])
         weather["description"] = _get_description(weather["code"])
         weather["daytime"] = _is_daytime(forecast["astronomy"])
-        weather["taps"] = _test_taps_aff(weather["temp_f"], weather["code"])
-        # Produce a forecast
 
+        # Taps Aff?
+        weather["taps"] = _test_taps_aff(weather["temp_f"], weather["code"])
+        weather["aff"] = weather["taps"]["status"] == AFF
+
+        # Produce a forecast
+        weather["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
     except KeyError:
         raise TapsRequestError()
 
@@ -100,7 +138,7 @@ def _decode_forecast(raw):
 
 def query(location):
     # Grab the weather
-    forecast_raw = _grab_forecast(location)
+    forecast_raw = _grab_forecast_data(location)
     forecast = _decode_forecast(forecast_raw)
 
     # Grab the weather
