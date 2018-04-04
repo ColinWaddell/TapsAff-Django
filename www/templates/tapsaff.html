@@ -1,1 +1,66 @@
-{{ weather }}
+{% include "header.html" %}
+{% load static %}
+
+<div class="container-fluid taps-area">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-6">
+            <h1>{{ location }}, the weather is:</h1>
+            <h2>taps <span class="{{ taps.status }}">{{ taps.status }}</span></h2>
+
+            <p class="definition">
+                <strong>Taps-Aff (Scots Vernacular)</strong> Literally "tops off."
+                The removing of one's shirt in the event of warm weather,
+                a phenomenon rarely seen in Glasgow. Now an expression
+                describing good times being
+                had.<sup><a href="http://www.urbandictionary.com/define.php?term=taps+aff">1</a></sup>
+            </p>
+
+            <p>
+                <strong>Antonym:</strong> Taps-Oan, "tops on".<br>
+                <strong>Current Weather:</strong> {{ description.scots }}<br>
+                <strong>Temperature:</strong> {{ temp_c|floatformat:"0"  }}&deg;C ({{ temp_f|floatformat:"0" }}&deg;F)
+            </p>
+        
+      </div>
+    </div>
+</div>
+
+<div class="container-fluid location text-center">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6 text-center">
+            <h2>Where are ye...?</h2>
+            <form role="search" id="locationsearch" method="POST" action="{% url 'www:index' %}" autocomplete="off">
+                {% csrf_token %}
+                <input
+                    name="location"
+                    id="location"
+                {% if place_error %}
+                    placeholder="{{ place_error }}"
+                {% else %}
+                    placeholder="Check anywhere in the UK!"
+                {% endif %}
+                >
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer text-center">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+            <p>An automated service; keeping the people of {{ location }} informed.</p>
+            <div class="row links">
+                <div class="col">
+                    <p>Site Author</p>
+                    <a href="http://colinwaddell.com">ColinWaddell.com</a>
+                </div>
+                <div class="col">
+                    <p>Sourcecode</p>
+                    <a href="https://github.com/ColinWaddell/TapsAff-Django">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}

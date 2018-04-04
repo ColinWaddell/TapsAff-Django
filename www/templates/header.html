@@ -1,0 +1,31 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="http://{{ request.META.HTTP_HOST }}" />
+
+    <meta property="og:url" content="htp://{{ request.META.HTTP_HOST }}"/> 
+    <meta property="og:title" content="Glasgow, Taps-Aff or Taps-Oan?"/> 
+    <meta property="og:image" content="htp://{% static 'img/logo.png' %}"/>
+
+    <title>{{ location }}, Taps-Aff or Taps-Oan?</title>
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+    <link href="{% static 'css/tapsaff.css' %}" rel="stylesheet" type="text/css">
+
+    
+    <link 
+        rel="shortcut icon" 
+    {% if taps.status == "oan" %}
+        href="{% static 'img/favicon_oan.ico' %}"
+    {% else %}
+        href="{% static 'img/favicon_oan.aff' %}"
+    {% endif %}
+    />
+
+  </head>
+
+  <body>

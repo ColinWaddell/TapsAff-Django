@@ -72,7 +72,7 @@ def _test_taps_aff(code, temp_f):
 def _get_description(code):
     weather = Weather.objects.get(code=int(code))
     return {
-        "description": weather.description,
+        "english": weather.description,
         "scots": weather.scots
     }
 
@@ -85,7 +85,7 @@ def _is_daytime(astronomy):
     return sunrise.time() < now.time() and sunset.time() > now.time()
 
 
-def _decode_forecast(raw):
+def _decode_forecast(raw, default_location="Glasgow"):
     # The packet we need to return
     weather = {
         'temp_f': 0,
@@ -94,11 +94,11 @@ def _decode_forecast(raw):
         'taps': {},
         'aff': False,
         'message': "$taps_status['message']",
-        'description': "$weather_description",
+        'description': "",
         'datetime': str(datetime.now()),
-        'location': "$location",
+        'location': default_location,
         'daytime': "$daytime",
-        'place_error': "(isset($place_error) ? $place_error : '')",
+        'place_error': None,
         'forecast': []
     }
 
@@ -108,30 +108,30 @@ def _decode_forecast(raw):
             raise TapsLocationError()
     except KeyError:
         raise TapsRequestError()
-
-    # Grab the proper data
-    try:
+    else:
+        # Grab the proper data
         try:
-            forecast = raw["query"]["results"]["channel"][0]
+            try:
+                forecast = raw["query"]["results"]["channel"][0]
+            except KeyError:
+                forecast = raw["query"]["results"]["channel"]
+                
+            # Stats
+            weather["code"] = int(forecast["item"]["condition"]["code"])
+            weather["temp_f"] = float(forecast["wind"]["chill"])
+            weather["temp_c"] = F_TO_C(weather["temp_f"])
+            weather["location"] = forecast["location"]["city"]
+            weather["description"] = _get_description(weather["code"])
+            weather["daytime"] = _is_daytime(forecast["astronomy"])
+
+            # Taps Aff?
+            weather["taps"] = _test_taps_aff(weather["temp_f"], weather["code"])
+            weather["aff"] = weather["taps"]["status"] == AFF
+
+            # Produce a forecast
+            weather["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
         except KeyError:
-            forecast = raw["query"]["results"]["channel"]
-            
-        # Stats
-        weather["code"] = int(forecast["item"]["condition"]["code"])
-        weather["temp_f"] = float(forecast["wind"]["chill"])
-        weather["temp_c"] = F_TO_C(weather["temp_f"])
-        weather["location"] = forecast["location"]["city"]
-        weather["description"] = _get_description(weather["code"])
-        weather["daytime"] = _is_daytime(forecast["astronomy"])
-
-        # Taps Aff?
-        weather["taps"] = _test_taps_aff(weather["temp_f"], weather["code"])
-        weather["aff"] = weather["taps"]["status"] == AFF
-
-        # Produce a forecast
-        weather["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
-    except KeyError:
-        raise TapsRequestError()
+            raise TapsRequestError()
 
     return weather
 
