@@ -60,7 +60,7 @@ def _test_taps_aff(code, temp_f):
     }
 
     if not Weather.objects.filter(code=code, terrible=True).count:
-        theshold = CONFIG.threshold
+        theshold = CONFIG().threshold
         if temp_f > theshold:
             taps["status"] = AFF
         elif temp_f + 5 > theshold:
@@ -84,30 +84,31 @@ def _is_daytime(astronomy):
 
     return sunrise.time() < now.time() and sunset.time() > now.time()
 
-
-def _decode_forecast(raw, default_location="Glasgow"):
-    # The packet we need to return
-    weather = {
+def _build_packet():
+    return {
         'temp_f': 0,
         'temp_c': 0,
         'code': -1,
         'taps': {},
         'aff': False,
-        'message': "$taps_status['message']",
+        'message': "",
         'description': "",
         'datetime': str(datetime.now()),
-        'location': default_location,
+        'location': None,
         'daytime': "$daytime",
         'place_error': None,
         'forecast': []
     }
 
+def _build_forecast(packet, raw):
     # Test if we've got a valid location
     try:
         if raw["query"]["count"] == 0:
             raise TapsLocationError()
+
     except KeyError:
         raise TapsRequestError()
+
     else:
         # Grab the proper data
         try:
@@ -117,38 +118,46 @@ def _decode_forecast(raw, default_location="Glasgow"):
                 forecast = raw["query"]["results"]["channel"]
                 
             # Stats
-            weather["code"] = int(forecast["item"]["condition"]["code"])
-            weather["temp_f"] = float(forecast["wind"]["chill"])
-            weather["temp_c"] = F_TO_C(weather["temp_f"])
-            weather["location"] = forecast["location"]["city"]
-            weather["description"] = _get_description(weather["code"])
-            weather["daytime"] = _is_daytime(forecast["astronomy"])
+            packet["code"] = int(forecast["item"]["condition"]["code"])
+            packet["temp_f"] = float(forecast["wind"]["chill"])
+            packet["temp_c"] = F_TO_C(packet["temp_f"])
+            packet["location"] = forecast["location"]["city"]
+            packet["description"] = _get_description(packet["code"])
+            packet["daytime"] = _is_daytime(forecast["astronomy"])
 
             # Taps Aff?
-            weather["taps"] = _test_taps_aff(weather["temp_f"], weather["code"])
-            weather["aff"] = weather["taps"]["status"] == AFF
+            packet["taps"] = _test_taps_aff(packet["temp_f"], packet["code"])
+            packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            weather["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
+            packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
+
         except KeyError:
             raise TapsRequestError()
 
-    return weather
+    return packet
 
 
-def query(location):
-    # Grab the weather
-    forecast_raw = _grab_forecast_data(location)
-    forecast = _decode_forecast(forecast_raw)
+def query(location_request=None, location_default=CONFIG().location):
 
-    # Need to try a location
-    # and if a place error
-    # occurs then retry with
-    # a cookie or default
-    # to Glasgow
+    # This is where we'll fill up our response
+    packet = _build_packet()
 
-    # Grab the weather
-    return forecast
+    if location_request:
+        try:
+            forecast_raw = _grab_forecast_data(location_request)
+            packet = _build_forecast(packet, forecast_raw)
+            return packet
+
+        except TapsLocationError:
+            packet["place_error"] = "Location '%s' unknown" % location_request
+            
+    # Either there was a search error
+    # or no location was supplied
+    forecast_raw = _grab_forecast_data(location_default)
+    packet = _build_forecast(packet, forecast_raw)
+    return packet
+
 
 if __name__ == "__main__":
     blah = query('glasgow')

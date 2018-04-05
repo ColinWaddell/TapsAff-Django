@@ -6,8 +6,16 @@ from .taps import forecast
 
 # Create your views here.
 class Index(View):
-    def get(self, request, location='Glasgow'):
+    def get(self, request, location=None):
+
+        if not location:
+            try:
+                location = request.session['location']
+            except KeyError:
+                location = None
+
         weather = forecast.query(location)
+        request.session['location'] = weather['location']
         return render(request, 'tapsaff.html', weather)
     
     def post(self, request):

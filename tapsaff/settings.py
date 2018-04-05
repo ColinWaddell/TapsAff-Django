@@ -96,6 +96,12 @@ DATABASES = {
     'default': env.db()
 }
 
+# Session
+# https://docs.djangoproject.com/en/2.0/topics/http/sessions/
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
