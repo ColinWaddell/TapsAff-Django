@@ -13,7 +13,7 @@ import environ
 import os
 root = environ.Path(__file__)
 
-env = environ.Env(DEBUG=(bool, False), AWS_KEY=(str, ""),)
+env = environ.Env(DEBUG=(bool, False), AWS_KEY=(str, ""))
 
 if 'SERVERTYPE' in os.environ and os.environ['SERVERTYPE'] == 'AWS Lambda':
     environ.Env.read_env(env_file="dist.env")
@@ -95,6 +95,14 @@ WSGI_APPLICATION = 'tapsaff.wsgi.application'
 DATABASES = {
     'default': env.db()
 }
+
+# Cache
+# http://equallytrue.blogspot.co.uk/2012/04/how-to-cache-outgoing-api-calls-in.html
+
+CACHES = {
+    'default': eval(env('CACHE', cast=str)) # Must do better
+}
+
 
 # Session
 # https://docs.djangoproject.com/en/2.0/topics/http/sessions/

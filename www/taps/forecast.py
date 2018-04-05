@@ -1,12 +1,14 @@
 from json import loads
 from urllib.request import urlopen
 from urllib.parse import quote_plus
+from requests import get
 
 from www.models import Weather, Settings
 from .settings import URL
 from .status import AFF, OAN
 
 from django.utils.timezone import datetime
+from django.core.cache import cache
 
 
 F_TO_C = lambda f: (f-32.0) * (5.0 / 9.0)
@@ -25,11 +27,30 @@ def _build_query(location):
     return URL.replace("LOCATION", quote_plus(location))
 
 
+def fetchJson(url):
+    cache_key = hash(url)
+    cached = cache.get(cache_key)
+    content = ""
+    if not cached:
+            response = get(url)
+            if(response.ok):
+                cache.set(cache_key, response.text)
+                content = response.text
+            else:
+                # Write some proper error handling code here
+                print("Error - status code: %s" % response.status_code)
+    else:
+        # Return the cached content
+        print("@@@@@@")
+        content = cached
+
+    return loads(content)
+
+
 def _grab_forecast_data(location):
     # Grab the forecast
-    query_url = _build_query(location)
-    url = urlopen(query_url)
-    forecast = loads(url.read().decode())
+    query_url = _build_query(location.lower())
+    forecast = fetchJson(query_url)
     return forecast
 
 
