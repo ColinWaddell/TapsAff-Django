@@ -1,10 +1,11 @@
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
 from .taps import forecast
 
-# Create your views here.
+
 class Index(View):
     def get(self, request, location=None):
 
@@ -21,3 +22,15 @@ class Index(View):
     def post(self, request):
         location = request.POST["location"]
         return redirect("www:index", location=location)
+
+class Api(View):
+    def get(self, request, location=None):
+        
+        data = dict()
+
+        if not location:
+            data["error"] = "location not supplied"
+        else:
+            data = forecast.query(location)
+        
+        return JsonResponse(data)

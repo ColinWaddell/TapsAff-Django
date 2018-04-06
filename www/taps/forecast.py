@@ -41,7 +41,6 @@ def fetchJson(url):
                 print("Error - status code: %s" % response.status_code)
     else:
         # Return the cached content
-        print("@@@@@@")
         content = cached
 
     return loads(content)
