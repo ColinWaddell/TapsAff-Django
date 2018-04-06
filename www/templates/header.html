@@ -9,7 +9,7 @@
 
     <meta property="og:url" content="http://{{ request.META.HTTP_HOST }}"/> 
     <meta property="og:title" content="Glasgow, Taps-Aff or Taps-Oan?"/> 
-    <meta property="og:image" content="http://{% static 'img/logo.png' %}"/>
+    <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'img/logo.png' %}"/>
 
     <title>{{ location }}, Taps-Aff or Taps-Oan?</title>
 
