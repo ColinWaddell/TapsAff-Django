@@ -14,11 +14,7 @@ import os
 root = environ.Path(__file__)
 
 env = environ.Env(DEBUG=(bool, False), AWS_KEY=(str, ""))
-
-if 'PWD' in os.environ and os.environ['PWD'] ==  '/srv/www/django.taps-aff.co.uk/www':
-    environ.Env.read_env(env_file="dist.env")
-else:
-    environ.Env.read_env(env_file="dev.env")
+environ.Env.read_env()
 
 BASE_DIR = root()
 DEBUG = env('DEBUG')
@@ -38,7 +34,8 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'localhost'
+    'localhost',
+    'django.taps-aff.co.uk'
 ]
 
 LOGIN_URL = "/admin/login"
