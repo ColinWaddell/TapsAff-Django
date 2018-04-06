@@ -35,7 +35,8 @@ SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'django.taps-aff.co.uk'
+    'taps-aff.co.uk',
+    'www.taps-aff.co.uk'
 ]
 
 LOGIN_URL = "/admin/login"
