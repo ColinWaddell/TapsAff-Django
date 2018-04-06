@@ -15,7 +15,7 @@ root = environ.Path(__file__)
 
 env = environ.Env(DEBUG=(bool, False), AWS_KEY=(str, ""))
 
-if 'SERVERTYPE' in os.environ and os.environ['SERVERTYPE'] == 'AWS Lambda':
+if 'PWD' in os.environ and os.environ['PWD'] ==  '/srv/www/django.taps-aff.co.uk/www':
     environ.Env.read_env(env_file="dist.env")
 else:
     environ.Env.read_env(env_file="dev.env")
