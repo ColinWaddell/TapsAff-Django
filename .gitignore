@@ -9,6 +9,9 @@ www/static/css/
 *.map
 .DS_Store
 
+www/static/img/taps_clothing.png
+www/static/img/taps_weather.png
+
 # C extensions
 *.so
 
