@@ -47,9 +47,9 @@
 
 .map {
     background: #fafafa;
-    padding: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border-top: 1px solid #eee;
-    padding-bottom: 30px;
 
     #btnMaps {
         display: none;
@@ -75,7 +75,8 @@
 
 .location {
     background: white;
-    padding: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
     font-style: italic;
     border-top: 1px solid #eee;
     padding-bottom: 30px;
