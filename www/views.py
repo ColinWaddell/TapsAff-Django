@@ -1,9 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
 from .taps import forecast
+from .tapmap import icons
 
 
 class Index(View):
@@ -34,3 +35,14 @@ class Api(View):
             data = forecast.query(location)
         
         return JsonResponse(data)
+
+
+class Map(View):
+    def get(self, request, show=''):
+        map_icons = icons.get_clothing() if show == 'clothing' else icons.get_weather()
+        map_data = render(request, 'map/map.svg', {
+            'icons': map_icons,
+            'width': icons.C_WIDTH,
+            'height': icons.C_HEIGHT
+        })
+        return HttpResponse(map_data, content_type="image/svg+xml")
