@@ -13,7 +13,7 @@ import environ
 import os
 root = environ.Path(__file__)
 
-env = environ.Env(DEBUG=(bool, False), AWS_KEY=(str, ""))
+env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
 BASE_DIR = root()
@@ -35,7 +35,9 @@ SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'django.taps-aff.co.uk'
+    'taps-aff.co.uk',
+    'api.taps-aff.co.uk',
+    'www.taps-aff.co.uk'
 ]
 
 LOGIN_URL = "/admin/login"
