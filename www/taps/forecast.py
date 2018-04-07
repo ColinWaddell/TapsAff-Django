@@ -79,8 +79,6 @@ def _test_taps_aff(code, temp_f):
         'message': ""
     }
 
-    print(code)
-
     if not Weather.objects.filter(code=code, terrible=True).count():
         theshold = CONFIG().threshold
         if temp_f > theshold:
