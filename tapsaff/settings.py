@@ -46,6 +46,8 @@ LOGIN_URL = "/admin/login"
 
 INSTALLED_APPS = [
     'www.apps.WWWConfig',
+    'www.templatetags.weather_icon',
+    'www.templatetags.clothing_icon',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

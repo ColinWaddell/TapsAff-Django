@@ -1,5 +1,7 @@
 {% include "header.html" %}
 {% load static %}
+{% load weather_icon %}
+{% load clothing_icon %}
 
 <div class="container-fluid taps-area">
     <div class="row justify-content-md-center">
@@ -20,8 +22,19 @@
                 <strong>Current Weather:</strong> {{ description.scots }}<br>
                 <strong>Temperature:</strong> {{ temp_c|floatformat:"0"  }}&deg;C ({{ temp_f|floatformat:"0" }}&deg;F)
             </p>
-        
       </div>
+    </div>
+</div>
+
+<div class="container-fluid forecast">
+    <div class="row justify-content-md-center">
+    {% for daycast in forecast|slice:":5" %}
+      <div class="col">
+          {{ daycast.datetime|date:"l" }}
+          <img class="img-thumbnail" src="{% static 'img/weather/' %}{{ daycast.code|weather_icon }}.svg">
+          <img class="img-thumbnail" src="{% static 'img/clothing/' %}{{ daycast.code|clothing_icon:daycast.temp_high_c }}.svg">  
+      </div>
+    {% endfor %}
     </div>
 </div>
 

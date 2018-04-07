@@ -62,7 +62,7 @@ def _build_future_forecast(forecast):
             "temp_low_f_": float(daycast["low"]),
             "temp_low_f": F_TO_C(float(daycast["low"])),
             "taps": _test_taps_aff(daycast["code"], float(daycast["high"])),
-            "datetime": str(daycast["date"])
+            "datetime": datetime.strptime(daycast["date"], '%d %b %Y')
         }
         for daycast in forecast
     ]
@@ -151,7 +151,7 @@ def _build_forecast(packet, raw):
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            #packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
+            packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
 
         except KeyError:
             raise TapsRequestError()
