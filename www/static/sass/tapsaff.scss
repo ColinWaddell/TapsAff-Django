@@ -58,6 +58,7 @@
     img{
         width: 100%;
         border: 1px solid #EEE;
+        background: white;
         margin-bottom: 20px;
         margin-top: 20px;
         cursor: pointer;
@@ -68,7 +69,7 @@
     }      
 
     #btnMaps:checked + label > img#map_clothing{
-        content: url(../img/taps_weather.png);
+        content: url(/map/weather);
     }   
 }
 

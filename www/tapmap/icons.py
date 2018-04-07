@@ -16,7 +16,7 @@ def get_weather():
         forecast = GetWeatherIcon(weather["code"], weather["daytime"])
         icons.append({
             "src": "map/weather/" + forecast + ".svg",
-            "scale": 0.15,
+            "scale": 0.175,
             "x": round((location["x"]*C_WIDTH) - (I_WIDTH/2)),
             "y": round((location["y"]*C_HEIGHT) - (I_HEIGHT/2))
         })
@@ -37,7 +37,7 @@ def get_clothing():
 
         icons.append({
             "src": "map/clothing/" + clothing + ".svg",
-            "scale": 0.1,
+            "scale": 0.12,
             "x": round((location["x"]*C_WIDTH) - (I_WIDTH/2)),
             "y": round((location["y"]*C_HEIGHT) - (I_HEIGHT/2))
         })
