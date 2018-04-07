@@ -6,6 +6,8 @@ from django.views import View
 from .taps import forecast
 from .tapmap import icons
 
+from django.core.cache import cache
+
 
 class Index(View):
     def get(self, request, location=None):
@@ -39,10 +41,17 @@ class Api(View):
 
 class Map(View):
     def get(self, request, show=''):
-        map_icons = icons.get_clothing() if show == 'clothing' else icons.get_weather()
-        map_data = render(request, 'map/map.svg', {
-            'icons': map_icons,
-            'width': icons.C_WIDTH,
-            'height': icons.C_HEIGHT
-        })
+        cached = cache.get(show)
+
+        if not cached:
+            map_icons = icons.get_clothing() if show == 'clothing' else icons.get_weather()
+            map_data = render(request, 'map/map.svg', {
+                'icons': map_icons,
+                'width': icons.C_WIDTH,
+                'height': icons.C_HEIGHT
+            })
+            cache.set(show, map_data)
+        else:
+            map_data = cached
+
         return HttpResponse(map_data, content_type="image/svg+xml")
