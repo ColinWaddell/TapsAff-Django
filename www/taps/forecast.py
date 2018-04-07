@@ -79,10 +79,13 @@ def _test_taps_aff(code, temp_f):
         'message': ""
     }
 
-    if not Weather.objects.filter(code=code, terrible=True).count:
+    print(code)
+
+    if not Weather.objects.filter(code=code, terrible=True).count():
         theshold = CONFIG().threshold
         if temp_f > theshold:
             taps["status"] = AFF
+
         elif temp_f + 5 > theshold:
             taps["message"] = "...but only by a bawhair!"
     
@@ -146,11 +149,11 @@ def _build_forecast(packet, raw):
             packet["daytime"] = _is_daytime(forecast["astronomy"])
 
             # Taps Aff?
-            packet["taps"] = _test_taps_aff(packet["temp_f"], packet["code"])
+            packet["taps"] = _test_taps_aff(packet["code"], packet["temp_f"])
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
+            #packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
 
         except KeyError:
             raise TapsRequestError()
