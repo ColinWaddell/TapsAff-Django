@@ -68,8 +68,8 @@ WEATHER_ICON = [
   {"day": "drizzle",          "night": "cloud_rain_night"}, # 08 - freezing drizzle
   {"day": "rain",             "night": "cloud_rain_night"}, # 09 - drizzle
   {"day": "drizzle",          "night": "cloud_rain_night"}, # 10 - freezing rain
-  {"day": "showers",          "night": "showers"},          # 11 - showers
-  {"day": "showers",          "night": "showers"},          # 12 - showers
+  {"day": "showers",          "night": "cloud_rain_night"}, # 11 - showers
+  {"day": "showers",          "night": "cloud_rain_night"}, # 12 - showers
   {"day": "wind_cloud_snow",  "night": "snow_night"},       # 13 - snow flurries
   {"day": "wind_cloud_snow",  "night": "snow_night"},       # 14 - light snow showers
   {"day": "wind_cloud_snow",  "night": "snow_night"},       # 15 - blowing snow
@@ -96,8 +96,8 @@ WEATHER_ICON = [
   {"day": "temp_high",        "night": "temp_high"},        # 36 - hot
   {"day": "lightning",        "night": "lightning_night"},  # 37 - isolated thunderstorms
   {"day": "lightning",        "night": "lightning_night"},  # 38 - scattered thunderstorms
-  {"day": "showers",          "night": "showers"},          # 39 - scattered showers
-  {"day": "showers",          "night": "showers"},          # 40 - scattered showers
+  {"day": "showers",          "night": "cloud_rain_night"}, # 39 - scattered showers
+  {"day": "showers",          "night": "cloud_rain_night"}, # 40 - scattered showers
   {"day": "cloud_snow",       "night": "snow_night"},       # 41 - heavy snow
   {"day": "cloud_snow",       "night": "snow_night"},       # 42 - scattered snow showers
   {"day": "cloud_snow",       "night": "snow_night"},       # 43 - heavy snow
