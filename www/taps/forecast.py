@@ -59,10 +59,11 @@ def _build_future_forecast(forecast):
             "code": int(daycast["code"]),
             "temp_high_f" : float(daycast["high"]),
             "temp_high_c": F_TO_C(float(daycast["high"])),
-            "temp_low_f_": float(daycast["low"]),
-            "temp_low_f": F_TO_C(float(daycast["low"])),
+            "temp_low_f": float(daycast["low"]),
+            "temp_low_c": F_TO_C(float(daycast["low"])),
             "taps": _test_taps_aff(daycast["code"], float(daycast["high"])),
-            "datetime": datetime.strptime(daycast["date"], '%d %b %Y')
+            "datetime": datetime.strptime(daycast["date"], '%d %b %Y'),
+            "description": _get_description(daycast["code"])
         }
         for daycast in forecast
     ]

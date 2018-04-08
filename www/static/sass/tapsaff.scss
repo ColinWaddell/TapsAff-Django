@@ -46,9 +46,8 @@
 }
 
 .map {
-    background: #fafafa;
+    background: white;
     padding-top: 20px;
-    padding-bottom: 20px;
     border-top: 1px solid #eee;
 
     #btnMaps {
@@ -58,7 +57,7 @@
     img{
         width: 100%;
         border: 1px solid #EEE;
-        background: white;
+        background: #fbfdff;
         margin-bottom: 20px;
         margin-top: 20px;
         cursor: pointer;
@@ -73,8 +72,58 @@
     }   
 }
 
+
+.forecast {
+    background: #fafafa;
+    padding-bottom: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    
+    img {
+        background: white;
+        width: 70%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+
+    .day {
+        background: white;
+        border: 1px solid #eee;
+
+        .name {
+            font-weight: 600;
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .stats {
+            font-size: 10pt;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            .temp_low {
+                color: darken($oan, 10%);
+            }
+    
+            .temp_high {
+                color: darken($aff, 10%);
+            }        
+        }
+        
+        .description {
+            display: block;
+            border-top: 1px solid #eee;
+            width: 100%;
+            margin-top: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    }
+}
+
 .location {
-    background: white;
+    background: #fafafa;
     padding-top: 20px;
     padding-bottom: 20px;
     font-style: italic;
