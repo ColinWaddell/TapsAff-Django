@@ -4,7 +4,7 @@
 <div class="container-fluid taps-area">
     <div class="row justify-content-md-center">
       <div class="col col-lg-6">
-            <h1>{{ location }}, the weather is:</h1>
+            <h1><a href="#search">{{ location }}</a>, the weather is:</h1>
             <h2>taps <span class="{{ taps.status }}">{{ taps.status }}</span></h2>
 
             <p class="definition">
@@ -76,10 +76,10 @@
     </div>
 </div>
 
-<div class="container-fluid location text-center">
+<div class="container-fluid location text-center" id="search">
     <div class="row justify-content-md-center">
         <div class="col col-lg-6 text-center">
-            <h2>Where are ye...?</h2>
+            <label for="location"><h2>Where are ye...?</h2></label>
             <form role="search" id="locationsearch" method="POST" action="{% url 'www:index' %}" autocomplete="off">
                 {% csrf_token %}
                 <input
