@@ -107,11 +107,12 @@
             margin-top: 5px;
             margin-bottom: 10px;
             .temp_low {
-                color: darken($oan, 10%);
+                font-weight: 600;
+                color: #666;
             }
     
             .temp_high {
-                color: darken($aff, 10%);
+                font-weight: 900;
             }        
         }
         
