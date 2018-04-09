@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .taps-area {
     background: white;
     padding-bottom: 40px;
@@ -9,11 +13,12 @@
 
         a {
             color: black;
-            border-bottom: 3px dashed black;
+            border-bottom: 2px dashed black;
 
             &:hover{
+                color: #333;
                 text-decoration: none;
-                border-bottom: 3px solid black;
+                border-bottom: 2px dashed #333;
             }
         }
     }
@@ -56,7 +61,8 @@
 }
 
 .map {
-    padding: 20px; 
+
+    border-right: 1px solid #eee;
 
     #btnMaps {
         display: none;

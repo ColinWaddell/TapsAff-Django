@@ -25,9 +25,10 @@
 </div>
 
 <div class="container-fluid forecast">
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center">
         <!-- Map -->
-        <div class="col-xl-5 col-md-6 text-center map">
+        <div class="col-xl-5 col-md-6 map">
+            <h3>Scotland:</h3>
             <input type="checkbox" id="btnMaps"/>
             <label class="btn" for="btnMaps">
                 <img src="{% url 'www:clothing' %}" id="map_clothing" />
@@ -37,7 +38,7 @@
 
         <!-- Forecast -->
         <div class="col-xl-4 col-md-5">
-            <h3>{{ weather.location }}'s forecast...</h3>
+            <h3>{{ weather.location }}'s forecast:</h3>
 
             <div class="row justify-content-center">
                 {% for daycast in weather.forecast|slice:"1:4" %}
