@@ -56,9 +56,7 @@
 }
 
 .map {
-    background: white;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+    padding: 20px; 
 
     #btnMaps {
         display: none;
@@ -67,9 +65,7 @@
     img{
         width: 100%;
         border: 1px solid #EEE;
-        background: #fbfdff;
-        margin-bottom: 20px;
-        margin-top: 20px;
+        background: #fff;
         cursor: pointer;
     }
     
@@ -93,17 +89,17 @@
         margin-bottom: 20px;
     }
     
-    img {
-        background: white;
-        width: 70%;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-
     .day {
         background: white;
         border: 1px solid #eee;
+
+        img {
+            background: white;
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 10px;
+        }
 
         .name {
             font-weight: 600;
@@ -138,7 +134,7 @@
 }
 
 .location {
-    background: #fafafa;
+    background: white;
     padding-top: 20px;
     padding-bottom: 20px;
     font-style: italic;
