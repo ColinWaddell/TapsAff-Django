@@ -4,8 +4,8 @@
 <div class="container-fluid taps-area">
     <div class="row justify-content-md-center">
       <div class="col col-lg-6">
-            <h1><a href="#search">{{ location }}</a>, the weather is:</h1>
-            <h2>taps <span class="{{ taps.status }}">{{ taps.status }}</span></h2>
+            <h1><a href="#search">{{ weather.location }}</a>, the weather is:</h1>
+            <h2>taps <span class="{{ weather.taps.status }}">{{ weather.taps.status }}</span></h2>
 
             <p class="definition">
                 <strong>Taps-Aff (Scots Vernacular)</strong> Literally "tops off."
@@ -17,8 +17,8 @@
 
             <p>
                 <strong>Antonym:</strong> Taps-Oan, "tops on".<br>
-                <strong>Current Weather:</strong> {{ description.scots }}<br>
-                <strong>Temperature:</strong> {{ temp_c|floatformat:"0"  }}&deg;C ({{ temp_f|floatformat:"0" }}&deg;F)
+                <strong>Current Weather:</strong> {{ weather.description.scots }}<br>
+                <strong>Temperature:</strong> {{ weather.temp_c|floatformat:"0"  }}&deg;C ({{ weather.temp_f|floatformat:"0" }}&deg;F)
             </p>
       </div>
     </div>
@@ -37,10 +37,10 @@
 
         <!-- Forecast -->
         <div class="col-xl-4 col-md-5">
-            <h3>{{ location }}'s forecast...</h3>
+            <h3>{{ weather.location }}'s forecast...</h3>
 
             <div class="row justify-content-center">
-                {% for daycast in forecast|slice:"1:4" %}
+                {% for daycast in weather.forecast|slice:"1:4" %}
                 <div class="col-4 text-center">
                     {% include "day.html" %}
                 </div>
@@ -48,13 +48,13 @@
             </div>
             <br />
             <div class="row justify-content-center">
-                {% for daycast in forecast|slice:"4:7" %}
+                {% for daycast in weather.forecast|slice:"4:7" %}
                 <div class="col-4 text-center">
                     {% include "day.html" %}
                 </div>
                 {% endfor %}
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -69,7 +69,7 @@
                     name="location"
                     id="location"
                 {% if place_error %}
-                    placeholder="{{ place_error }}"
+                    placeholder="{{ weather.place_error }}"
                 {% else %}
                     placeholder="Check anywhere in the UK!"
                 {% endif %}
@@ -82,7 +82,7 @@
 <div class="container-fluid footer text-center">
     <div class="row justify-content-md-center">
         <div class="col col-lg-6">
-            <p>An automated service; keeping the people of {{ location }} informed.</p>
+            <p>An automated service; keeping the people of {{ weather.location }} informed.</p>
             <div class="row links">
                 <div class="col">
                     <p>Site Author</p>

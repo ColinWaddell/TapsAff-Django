@@ -11,7 +11,7 @@
     <meta property="og:title" content="Glasgow, Taps-Aff or Taps-Oan?"/> 
     <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'img/logo.png' %}"/>
 
-    <title>{{ location }}, Taps-Aff or Taps-Oan?</title>
+    <title>{{ weather.location }}, Taps-Aff or Taps-Oan?</title>
 
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     <link href="{% static 'css/tapsaff.css' %}" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@
 
     <script type="text/javascript">
         var _gaq = _gaq || [];
-        _gaq.push(["_setAccount", "UA-41104029-1"]);
+        _gaq.push(["_setAccount", "{{ settings.google_id }}"]);
         _gaq.push(["_trackPageview"]);
         
         (function() {

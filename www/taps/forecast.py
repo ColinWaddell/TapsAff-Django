@@ -160,7 +160,7 @@ def _build_forecast(packet, raw):
     return packet
 
 
-def query(location_request=None, location_default=CONFIG().location):
+def query(location_request=None, location_default='Glasgow'):
 
     # This is where we'll fill up our response
     packet = _build_packet()
