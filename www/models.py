@@ -3,9 +3,10 @@ from django.db import models
 # Create your models here.
 
 class Settings(models.Model):
-    location = models.TextField()
+    location = models.CharField(max_length=100)
     cache_seconds = models.IntegerField()
     threshold = models.FloatField()
+    google_id = models.CharField(max_length=20)
 
 
 class Weather(models.Model):

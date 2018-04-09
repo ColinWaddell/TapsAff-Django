@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
+from.models import Settings
+CONFIG = lambda: Settings.objects.first()
+
 from .taps import forecast
 from .tapmap import icons
 
@@ -18,9 +21,12 @@ class Index(View):
             except KeyError:
                 location = None
 
-        weather = forecast.query(location)
+        weather = forecast.query(location, location_default=CONFIG().location)
         request.session['location'] = weather['location']
-        return render(request, 'tapsaff.html', weather)
+        return render(request, 'tapsaff.html', {
+            "weather": weather,
+            "settings": CONFIG
+        })
     
     def post(self, request):
         location = request.POST["location"]
