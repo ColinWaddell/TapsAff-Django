@@ -42,6 +42,11 @@ class Api(View):
         else:
             data = forecast.query(location)
         
+        if data["place_error"]:
+            data = {
+                "error": data["place_error"]
+            }
+
         return JsonResponse(data)
 
 
