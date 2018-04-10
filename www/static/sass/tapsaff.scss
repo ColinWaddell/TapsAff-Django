@@ -24,7 +24,7 @@ html {
     }
 
     h2 {
-        font-size: $h1-font-size * 3.5;
+        font-size: $h1-font-size * 3.1;
         text-shadow: 0 4px 10px #AAA;
         text-align: center;
         font-weight: 800;
@@ -185,6 +185,20 @@ html {
     .links {
         p {
             margin-bottom: 0;
+        }
+    }
+}
+
+@include media-breakpoint-down(xs) {
+    .tight-xs {
+        padding-right: 2px;
+        padding-left: 2px;
+
+        .day {
+            .name,
+            .description {
+                font-size: 0.8rem;
+            }
         }
     }
 }

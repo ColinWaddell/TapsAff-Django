@@ -42,7 +42,7 @@
 
             <div class="row justify-content-center">
                 {% for daycast in weather.forecast|slice:"0:3" %}
-                <div class="col-4 text-center">
+                <div class="col-4 text-center tight-xs">
                     {% include "day.html" %}
                 </div>
                 {% endfor %}
@@ -50,7 +50,7 @@
             <br />
             <div class="row justify-content-center">
                 {% for daycast in weather.forecast|slice:"3:6" %}
-                <div class="col-4 text-center">
+                <div class="col-4 text-center tight-xs">
                     {% include "day.html" %}
                 </div>
                 {% endfor %}
