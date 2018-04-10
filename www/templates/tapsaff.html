@@ -27,7 +27,7 @@
 <div class="container-fluid forecast">
     <div class="row justify-content-center">
         <!-- Map -->
-        <div class="col-xl-5 col-md-6 map">
+        <div class="col-xl-5 col-md-6 map tight-md">
             <h3>Scotland:</h3>
             <input type="checkbox" id="btnMaps"/>
             <label class="btn" for="btnMaps">
@@ -42,7 +42,7 @@
 
             <div class="row justify-content-center">
                 {% for daycast in weather.forecast|slice:"0:3" %}
-                <div class="col-4 text-center tight-xs">
+                <div class="col-4 text-center tight-md">
                     {% include "day.html" %}
                 </div>
                 {% endfor %}
@@ -50,7 +50,7 @@
             <br />
             <div class="row justify-content-center">
                 {% for daycast in weather.forecast|slice:"3:6" %}
-                <div class="col-4 text-center tight-xs">
+                <div class="col-4 text-center tight-md">
                     {% include "day.html" %}
                 </div>
                 {% endfor %}

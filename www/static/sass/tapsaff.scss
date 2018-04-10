@@ -194,8 +194,8 @@ html {
     }
 }
 
-@include media-breakpoint-down(xs) {
-    .tight-xs {
+@include media-breakpoint-down(md) {
+    .tight-md {
         padding-right: 2px;
         padding-left: 2px;
 
