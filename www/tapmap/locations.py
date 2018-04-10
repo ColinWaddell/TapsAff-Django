@@ -61,7 +61,7 @@ LOCATIONS = [
 
     {
         "name": "Orkney",
-        "x": 0.59,
+        "x": 0.60,
         "y": 0.295
     },
 
@@ -73,7 +73,7 @@ LOCATIONS = [
 
     {
         "name": "Shetland",
-        "x": 0.80,
+        "x": 0.78,
         "y": 0.074
     },
 
