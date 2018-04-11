@@ -13,16 +13,14 @@
 
     <title>{{ weather.location }}, Taps-Aff or Taps-Oan?</title>
 
-    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     <link href="{% static 'css/tapsaff.css' %}" rel="stylesheet" type="text/css">
-
     
     <link 
         rel="shortcut icon" 
-    {% if taps.status == "oan" %}
+    {% if weather.taps.status == "oan" %}
         href="{% static 'img/favicon_oan.ico' %}"
     {% else %}
-        href="{% static 'img/favicon_oan.aff' %}"
+        href="{% static 'img/favicon_aff.ico' %}"
     {% endif %}
     />
 
