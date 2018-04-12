@@ -127,13 +127,21 @@ html {
             font-size: 10pt;
             margin-top: 5px;
             margin-bottom: 10px;
+
+            .temp_low,
+            .temp_high {
+                display: inline-block;
+            }
+
             .temp_low {
                 font-weight: 600;
                 color: #666;
+                padding-right: 4px;
             }
     
             .temp_high {
                 font-weight: 900;
+                padding-right: 4px;
             }        
         }
         
