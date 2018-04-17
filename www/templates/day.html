@@ -3,7 +3,13 @@
 {% load clothing_icon %}
 
 <div class="day">
-    <span class="name">{{ daycast.datetime|date:"l" }}</span>
+    <span class="name">
+        {% if show_today and forloop.counter == 1 %}
+            Today
+        {% else %}
+            {{ daycast.datetime|date:"l" }}
+        {% endif %}
+    </span>
     <img src="{% static 'img/weather/' %}{{ daycast.code|weather_icon }}.svg">
     <img src="{% static 'img/clothing/' %}{{ daycast.code|clothing_icon:daycast.temp_high_c }}.svg">
     <div class="stats">
