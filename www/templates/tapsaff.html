@@ -6,6 +6,9 @@
       <div class="col col-lg-6">
             <h1><a href="#search">{{ weather.location }}</a>, the weather is:</h1>
             <h2>taps <span class="{{ weather.taps.status }}">{{ weather.taps.status }}</span></h2>
+            {% if weather.taps.message %}
+                <h3>{{ weather.taps.message }}</h3>
+            {% endif %}
 
             <p class="definition">
                 <strong>Taps-Aff (Scots Vernacular)</strong> Literally "tops off."
