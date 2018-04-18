@@ -26,10 +26,11 @@ class Weather(models.Model):
     description = models.TextField()
     scots = models.TextField()
     terrible = models.BooleanField()
-    night = models.BooleanField(default=False)
+    nighttime = models.BooleanField(default=False)
     delta = models.FloatField(default=0)
     colder = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="colder")
     cold = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="cold")
     fair = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="fair")
     warm = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="warm")
+    
     
