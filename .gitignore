@@ -8,7 +8,6 @@ www/static/css/
 *-lock.json
 *.map
 .DS_Store
-sitemap.xml
 
 www/static/img/taps_clothing.png
 www/static/img/taps_weather.png

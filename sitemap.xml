@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.google.com/schemas/sitemap/0.9">
+
+  <url>
+    <loc>http://www.taps-aff.co.uk</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>http://www.taps-aff.co.uk/Glasgow</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.taps-aff.co.uk/Edinburgh</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
+ 
+  <url>
+    <loc>http://www.taps-aff.co.uk/London</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
+ 
+  <url>
+    <loc>http://www.taps-aff.co.uk/Aberdeen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
+ 
+  <url>
+    <loc>http://www.taps-aff.co.uk/Dundee</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  
+</urlset>
