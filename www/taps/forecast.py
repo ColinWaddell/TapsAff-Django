@@ -61,7 +61,7 @@ def _build_future_forecast(forecast):
             "temp_high_c": F_TO_C(float(daycast["high"])),
             "temp_low_f": float(daycast["low"]),
             "temp_low_c": F_TO_C(float(daycast["low"])),
-            "taps": _test_taps_aff(daycast["code"], float(daycast["high"])),
+            "taps": _test_taps_aff(daycast["code"], float(daycast["high"]), True),
             "datetime": datetime.strptime(daycast["date"], '%d %b %Y'),
             "description": _get_description(daycast["code"])
         }
@@ -70,7 +70,7 @@ def _build_future_forecast(forecast):
     return data
 
 
-def _test_taps_aff(code, temp_f):
+def _test_taps_aff(code, temp_f, daytime):
     # test terrible list: oan
     # test if greater than temp: aff
     # test elif close to boundary: oan
@@ -80,7 +80,7 @@ def _test_taps_aff(code, temp_f):
         'message': ""
     }
 
-    if not Weather.objects.filter(code=code, terrible=True):
+    if not Weather.objects.filter(code=code, terrible=True) and daytime:
         delta = Weather.objects.get(code=code).delta
         theshold = CONFIG().threshold + delta
         if temp_f > theshold:
@@ -149,7 +149,7 @@ def _build_forecast(packet, raw):
             packet["daytime"] = _is_daytime(forecast["astronomy"])
 
             # Taps Aff?
-            packet["taps"] = _test_taps_aff(packet["code"], packet["temp_f"])
+            packet["taps"] = _test_taps_aff(packet["code"], packet["temp_f"], packet["daytime"])
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
