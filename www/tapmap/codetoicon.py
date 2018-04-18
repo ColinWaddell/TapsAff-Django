@@ -1,4 +1,3 @@
-from .weathercodes import WEATHER_ICON
 from www.models import Settings, Weather
 
 
@@ -28,7 +27,8 @@ def GetClothingIcon(code, temp_high):
 
 def GetWeatherIcon(code, daytime):
     try:
-        return WEATHER_ICON[code]["day" if daytime else "night"]
+        weather = Weather.objects.get(code=code)
+        return weather.weather_day.icon if daytime else weather.weather_night.icon
     except IndexError:
         return 'cloud'
 
