@@ -30,7 +30,7 @@ WEATHER_CLOTHING = [
   {"colder": "jacket", "cold": "hoodie", "fair": "tshirt", "warm": "tshirt"}, # 21 - haze
   {"colder": "jacket", "cold": "hoodie", "fair": "tshirt", "warm": "tshirt"}, # 22 - smoky
   {"colder": "jacket", "cold": "jacket", "fair": "hoodie", "warm": "tshirt"}, # 23 - blustery
-  {"colder": "jacket", "cold": "jacket", "fair": "hoddie", "warm": "tshirt"}, # 24 - windy
+  {"colder": "jacket", "cold": "jacket", "fair": "hoodie", "warm": "tshirt"}, # 24 - windy
   {"colder": "jacket", "cold": "jacket", "fair": "hoodie", "warm": "hoodie"}, # 25 - cold
   {"colder": "jacket", "cold": "hoodie", "fair": "tshirt", "warm": "tshirt"}, # 26 - cloudy
   {"colder": "jacket", "cold": "hoodie", "fair": "hoodie", "warm": "tshirt"}, # 27 - mostly cloudy (night)
