@@ -8,6 +8,7 @@ class WeatherAdmin(admin.ModelAdmin):
         'description',
         'scots',
         'terrible',
+        'delta',
         'night',
     )
 

@@ -80,12 +80,13 @@ def _test_taps_aff(code, temp_f):
         'message': ""
     }
 
-    if not Weather.objects.filter(code=code, terrible=True).count():
-        theshold = CONFIG().threshold
+    if not Weather.objects.filter(code=code, terrible=True):
+        delta = Weather.objects.get(code=code).delta
+        theshold = CONFIG().threshold + delta
         if temp_f > theshold:
             taps["status"] = AFF
 
-        elif temp_f + 5 > theshold:
+        elif temp_f + CONFIG().delta > theshold:
             taps["message"] = "...but only by a bawhair!"
     
     return taps

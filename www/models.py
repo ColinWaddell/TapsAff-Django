@@ -7,6 +7,7 @@ class Settings(models.Model):
     cache_seconds = models.IntegerField()
     threshold = models.FloatField()
     google_id = models.CharField(max_length=20)
+    delta = models.FloatField(default=5)
 
 
 class Weather(models.Model):
@@ -15,3 +16,4 @@ class Weather(models.Model):
     scots = models.TextField()
     terrible = models.BooleanField()
     night = models.BooleanField(default=False)
+    delta = models.FloatField(default=0)
