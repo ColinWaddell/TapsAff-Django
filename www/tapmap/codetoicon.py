@@ -1,13 +1,12 @@
 from www.models import Settings, Weather
 
 
-def GetTemperatureStatus(temp_high):
-    config = Settings.objects.first()
+def GetTemperatureStatus(temp_high, weather):
     temperatures = [
-        {"title": "colder", "lowerBound": config.colder},
-        {"title": "cold", "lowerBound": config.cold},
-        {"title": "fair", "lowerBound": config.fair},
-        {"title": "warm", "lowerBound": config.warm}
+        {"title": "colder", "lowerBound": weather.colder},
+        {"title": "cold", "lowerBound": weather.cold},
+        {"title": "fair", "lowerBound": weather.fair},
+        {"title": "warm", "lowerBound": weather.warm}
     ]
     try:
         return [status["title"] for status in temperatures if temp_high > status["lowerBound"]][-1]
@@ -18,7 +17,7 @@ def GetTemperatureStatus(temp_high):
 def GetClothingIcon(code, temp_high):
     weather = Weather.objects.get(code=code)
     try:
-        status = GetTemperatureStatus(temp_high)
+        status = GetTemperatureStatus(temp_high, weather)
         clothing = getattr(weather, "clothing_" + status)
         return clothing.icon
     except (IndexError, AttributeError):
