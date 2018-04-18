@@ -1,4 +1,4 @@
-from .weathercodes import WEATHER_ICON, WEATHER_CLOTHING
+from .weathercodes import WEATHER_ICON
 from www.models import Settings, Weather
 
 
