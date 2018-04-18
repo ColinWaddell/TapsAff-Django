@@ -39,5 +39,6 @@ class Weather(models.Model):
     clothing_cold = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="cold")
     clothing_fair = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="fair")
     clothing_warm = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="warm")
+    weather_icon = models.ForeignKey(WeatherIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="weather_icon")
     
     

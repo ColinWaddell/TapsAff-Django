@@ -13,7 +13,8 @@ class WeatherAdmin(admin.ModelAdmin):
         'clothing_colder',
         'clothing_cold',
         'clothing_fair',
-        'clothing_warm'
+        'clothing_warm',
+        'weather_icon',
     )
 
     ordering = (
