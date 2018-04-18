@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Settings, Weather, Clothing
+from .models import Settings, Weather, ClothingIcon
 
 
 class WeatherAdmin(admin.ModelAdmin):
@@ -28,5 +28,5 @@ class ClothingAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Settings)
-admin.site.register(Clothing, ClothingAdmin)
+admin.site.register(ClothingIcon, ClothingAdmin)
 admin.site.register(Weather, WeatherAdmin)

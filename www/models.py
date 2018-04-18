@@ -14,7 +14,14 @@ class Settings(models.Model):
     warm = models.FloatField(default=16)
 
 
-class Clothing(models.Model):
+class WeatherIcon(models.Model):
+    icon = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.icon
+
+
+class ClothingIcon(models.Model):
     icon = models.CharField(max_length=20)
 
     def __str__(self):
@@ -28,9 +35,9 @@ class Weather(models.Model):
     terrible = models.BooleanField()
     nighttime = models.BooleanField(default=False)
     delta = models.FloatField(default=0)
-    colder = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="colder")
-    cold = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="cold")
-    fair = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="fair")
-    warm = models.ForeignKey(Clothing, on_delete=models.CASCADE, blank=True, null=True, related_name="warm")
+    colder = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="colder")
+    cold = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="cold")
+    fair = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="fair")
+    warm = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="warm")
     
     
