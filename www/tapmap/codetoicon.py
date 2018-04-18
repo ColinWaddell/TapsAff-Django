@@ -20,7 +20,7 @@ def GetClothingIcon(code, temp_high):
     weather = Weather.objects.get(code=code)
     try:
         status = GetTemperatureStatus(temp_high)
-        clothing = getattr(weather, status)
+        clothing = getattr(weather, "clothing_" + status)
         return clothing.icon
     except (IndexError, AttributeError):
         return 'jacket'

@@ -10,10 +10,10 @@ class WeatherAdmin(admin.ModelAdmin):
         'terrible',
         'delta',
         'nighttime',
-        'colder',
-        'cold',
-        'fair',
-        'warm'
+        'clothing_colder',
+        'clothing_cold',
+        'clothing_fair',
+        'clothing_warm'
     )
 
     ordering = (

@@ -35,9 +35,9 @@ class Weather(models.Model):
     terrible = models.BooleanField()
     nighttime = models.BooleanField(default=False)
     delta = models.FloatField(default=0)
-    colder = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="colder")
-    cold = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="cold")
-    fair = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="fair")
-    warm = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="warm")
+    clothing_colder = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="colder")
+    clothing_cold = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="cold")
+    clothing_fair = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="fair")
+    clothing_warm = models.ForeignKey(ClothingIcon, on_delete=models.CASCADE, blank=True, null=True, related_name="warm")
     
     
