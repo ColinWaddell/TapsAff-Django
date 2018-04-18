@@ -45,15 +45,15 @@ LOGIN_URL = "/admin/login"
 # Application definition
 
 INSTALLED_APPS = [
-    'www.apps.WWWConfig',
-    'www.templatetags.weather_icon',
-    'www.templatetags.clothing_icon',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'www.apps.WWWConfig',
+    'www.templatetags.weather_icon',
+    'www.templatetags.clothing_icon',
 ]
 
 MIDDLEWARE = [

@@ -1,9 +1,4 @@
-TEMPERATURES = [
-  {"title": "colder", "lowerBound": -273.15},
-  {"title": "cold",   "lowerBound":       5},
-  {"title": "fair",   "lowerBound":      13},
-  {"title": "warm",   "lowerBound":      16}
-]
+
 
 WEATHER_CLOTHING = [
   {"colder": "jacket", "cold": "jacket", "fair": "jacket", "warm": "hoodie"}, # 00 - tornado
