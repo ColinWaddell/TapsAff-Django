@@ -135,13 +135,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'GMT'
+TIME_ZONE = 'Europe/London'
 
 USE_I18N = True
 
 USE_L10N = False
-
-USE_TZ = True
 
 DATETIME_INPUT_FORMATS = [
     '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
