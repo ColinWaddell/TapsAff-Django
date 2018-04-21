@@ -83,7 +83,7 @@ def _test_taps_aff(code, temp_f, daytime):
     if not Weather.objects.filter(code=code, terrible=True) and daytime:
         delta = Weather.objects.get(code=code).delta
         theshold = CONFIG().threshold + delta
-        if temp_f > theshold:
+        if temp_f >= theshold:
             taps["status"] = AFF
 
         elif temp_f + CONFIG().delta > theshold:
