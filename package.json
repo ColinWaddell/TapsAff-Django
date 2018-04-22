@@ -1,21 +1,21 @@
 {
   "name": "tapsaff",
   "version": "1.0.0",
-  "description": "",
+  "description": "Django implementation of taps-aff.co.uk",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ColinWaddell/TapsAff-Django/"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/ColinWaddell/TapsAff-Django/issues"
   },
-  "homepage": "",
+  "homepage": "http://taps-aff.co.uk/",
   "devDependencies": {
     "jquery": "^3.3.1",
     "popper.js": "^1.12.9",
