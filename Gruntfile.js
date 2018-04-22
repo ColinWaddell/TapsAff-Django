@@ -71,6 +71,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-shell-spawn');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // define default task
     grunt.registerTask('default', ['shell:djangoRun', 'browserSync', 'watch']);
