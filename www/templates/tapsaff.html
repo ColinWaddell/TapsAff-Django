@@ -36,9 +36,17 @@
         <!-- Map -->
         <div class="col-xl-5 col-md-6 map tight-md">
             <h3>Scotland:</h3>
-            <div id="app" v-on:click="show_clothing = !show_clothing">
-                <img src="{% url 'www:clothing' %}" v-if="show_clothing" />
-                <img src="{% url 'www:weather' %}" v-if="!show_clothing" />
+            <div id="map">
+                <button v-on:click="show_clothing = !show_clothing;">
+                    <span v-if="show_clothing">
+                        Show Weather
+                    </span>
+                    <span v-else>
+                        Show Clothing
+                    </span>
+                </button>
+                <object data="{% url 'www:clothing' %}" v-if="show_clothing" type="image/svg+xml"></object>
+                <object data="{% url 'www:weather' %}" v-if="!show_clothing" type="image/svg+xml"></object>
             </div>
         </div>
 

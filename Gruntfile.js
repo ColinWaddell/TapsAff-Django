@@ -40,6 +40,7 @@ module.exports = function (grunt) {
             applib: {  
                 src: [
                     'node_modules/vue/dist/vue.min.js',
+                    'www/static/vue/map.js'
                 ],  
                 dest: 'www/static/js/tapsaff.js',
             }  
