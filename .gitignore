@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 db.sqlite3
 www/static/css/
+www/static/js/tapsaff.js
 /static/
 *-lock.json
 *.map

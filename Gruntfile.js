@@ -33,6 +33,18 @@ module.exports = function (grunt) {
             }
         },
 
+        uglify: {  
+            options: {  
+                compress: false 
+            },  
+            applib: {  
+                src: [
+                    'node_modules/vue/dist/vue.min.js',
+                ],  
+                dest: 'www/static/js/tapsaff.js',
+            }  
+        },
+
         shell: {
             djangoRun: {
                 command: 'env/bin/python manage.py runserver',
