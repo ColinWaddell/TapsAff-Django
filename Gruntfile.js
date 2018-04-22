@@ -1,8 +1,8 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         watch: {
-            files: ['www/static/sass/**/*.{scss,sass}'],
-            tasks: ['sass']
+            files: ['www/static/sass/**/*.{scss,sass}', 'www/static/vue/**/*.js'],
+            tasks: ['sass', 'uglify']
         },
 
         sass: {
