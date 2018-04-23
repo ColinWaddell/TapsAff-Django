@@ -80,20 +80,35 @@ html {
         display: none;
     }
     
-    img{
-        width: 100%;
+    .canvas {
+
+        @include aspect-ratio(1164, 1530);
+        > .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
         border: 1px solid #EEE;
         background: #fff;
         cursor: pointer;
-    }
-    
-    #map_weather{
-        display: none;
-    }      
 
-    #btnMaps:checked + label > img#map_clothing{
-        content: url(/map/weather);
-    }   
+        img{
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #map_weather{
+            display: none;
+        }  
+
+
+        #btnMaps:checked + label > img#map_clothing{
+            content: url(/map/weather);
+        }   
+    }
 }
 
 
