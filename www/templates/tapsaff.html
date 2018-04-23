@@ -36,11 +36,16 @@
         <!-- Map -->
         <div class="col-xl-5 col-md-6 map tight-md">
             <h3>Scotland:</h3>
-            <input type="checkbox" id="btnMaps"/>
-            <label class="btn" for="btnMaps">
-                <img src="{% url 'www:clothing' %}" id="map_clothing" />
-                <img src="{% url 'www:weather' %}" id="map_weather" />
-            </label>
+
+            <div class="canvas">
+                <div class="content" v-on:click="clicky" >
+                    <input type="checkbox" id="btnMaps"/>
+                    <label class="btn" for="btnMaps">
+                        <img src="{% url 'www:clothing' %}" id="map_clothing" />
+                        <img src="{% url 'www:weather' %}" id="map_weather" />
+                    </label>
+                </div>
+            </div>
         </div>
 
         <!-- Forecast -->
