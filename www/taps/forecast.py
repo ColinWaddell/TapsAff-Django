@@ -161,6 +161,10 @@ def _build_forecast(packet, raw):
     return packet
 
 
+def is_taps_aff(code, temp_f, daytime=True):
+    return _test_taps_aff(code, temp_f, daytime)
+
+
 def query(location_request=None, location_default='Glasgow'):
 
     # This is where we'll fill up our response

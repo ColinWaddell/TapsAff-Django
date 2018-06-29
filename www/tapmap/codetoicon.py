@@ -1,4 +1,5 @@
 from www.models import Settings, Weather
+from www.taps.forecast import is_taps_aff
 
 
 def GetTemperatureStatus(temp_high, weather):
@@ -17,9 +18,13 @@ def GetTemperatureStatus(temp_high, weather):
 def GetClothingIcon(code, temp_high):
     weather = Weather.objects.get(code=code)
     try:
+        if is_taps_aff(code, temp_high):
+            return 'tapsaff'
+
         status = GetTemperatureStatus(temp_high, weather)
         clothing = getattr(weather, "clothing_" + status)
         return clothing.icon
+
     except (IndexError, AttributeError):
         return 'jacket'
 

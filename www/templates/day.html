@@ -16,7 +16,13 @@
         <div class="temp_low">{{ daycast.temp_low_c|floatformat:"0" }}&deg;C</div>
         <div class="temp_high">{{ daycast.temp_high_c|floatformat:"0" }}&deg;C</div>
     </div>
-    <span class="description">{{ daycast.description.scots }}</span>
+    <span class="description">
+        {% if daycast.taps.status == "aff" %}
+            Taps Aff
+        {% else %}
+            {{ daycast.description.scots }}
+        {% endif %}
+    </span>
 
     <!-- Code: {{ daycast.code }} -->
 </div>
