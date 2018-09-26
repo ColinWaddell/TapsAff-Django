@@ -162,7 +162,8 @@ def _build_forecast(packet, raw):
 
 
 def is_taps_aff(code, temp_f, daytime=True):
-    return _test_taps_aff(code, temp_f, daytime)
+    status = _test_taps_aff(code, temp_f, daytime)
+    return not status['status'] == OAN
 
 
 def query(location_request=None, location_default='Glasgow'):
