@@ -12,7 +12,7 @@ pylint==2.1.1
 pylint-django==2.0.2
 pylint-plugin-utils==0.4
 pytz==2018.5
-requests==2.19.1
+requests==2.20.1
 six==1.11.0
 typed-ast==1.1.0
 urllib3==1.23
