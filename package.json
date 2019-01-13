@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/ColinWaddell/TapsAff-Django/issues"
   },
-  "homepage": "http://taps-aff.co.uk/",
+  "homepage": "https://taps-aff.co.uk/",
   "devDependencies": {
     "bootstrap": "^4.0.0",
     "grunt-browser-sync": "^2.2.0",
