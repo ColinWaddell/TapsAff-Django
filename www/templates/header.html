@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://{{ request.META.HTTP_HOST }}" />
+    <base href="{{ request.scheme }}://{{ request.META.HTTP_HOST }}" />
 
     <meta property="og:url" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}"/> 
     <meta property="og:title" content="{{ weather.location }}, Taps-Aff or Taps-Oan?"/> 
