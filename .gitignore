@@ -118,3 +118,4 @@ node_modules/
 .vscode/
 
 dist\.env
+dev\.env
