@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="https://{{ request.META.HTTP_HOST }}" /><!-- force -->
+    <base href="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.META.HTTP_HOST }}" />
 
-    <meta property="og:url" content="https://{{ request.META.HTTP_HOST }}"/> 
+    <meta property="og:url" content="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.META.HTTP_HOST }}"/> 
     <meta property="og:title" content="{{ weather.location }}, Taps-Aff or Taps-Oan?"/> 
-    <meta property="og:image" content="https://{{ request.META.HTTP_HOST }}{% static 'img/logo.png' %}"/>
+    <meta property="og:image" content="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.META.HTTP_HOST }}{% static 'img/logo.png' %}"/>
 
     <title>{{ weather.location }}, Taps-Aff or Taps-Oan?</title>
 

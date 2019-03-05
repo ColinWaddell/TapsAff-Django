@@ -8,6 +8,7 @@ www/static/css/
 *-lock.json
 *.map
 .DS_Store
+_crap/
 
 www/static/img/taps_clothing.png
 www/static/img/taps_weather.png
@@ -117,3 +118,4 @@ node_modules/
 .vscode/
 
 dist\.env
+dev\.env

@@ -160,3 +160,9 @@ else:
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "www/static"),
 ]
+
+
+# Yahoo Developer Settings
+YAHOO_APP_ID = env('YAHOO_APP_ID')
+YAHOO_CONSUMER_KEY = env('YAHOO_CONSUMER_KEY')
+YAHOO_CONSUMER_SECRET = env('YAHOO_CONSUMER_SECRET')

@@ -4,11 +4,12 @@ from urllib.parse import quote_plus
 from requests import get
 
 from www.models import Weather, Settings
-from .settings import URL
 from .status import AFF, OAN
+from .yahoo import get_yahoo_weather
 
 from django.utils.timezone import datetime
 from django.core.cache import cache
+from django.conf import settings
 
 
 F_TO_C = lambda f: (f-32.0) * (5.0 / 9.0)
@@ -23,34 +24,15 @@ class TapsRequestError(Exception):
     pass
 
 
-def _build_query(location):
-    return URL.replace("LOCATION", quote_plus(location))
-
-
-def fetchJson(url):
-    cache_key = hash(url)
-    cached = cache.get(cache_key)
-    content = ""
-    if not cached:
-            response = get(url)
-            if(response.ok):
-                cache.set(cache_key, response.text)
-                content = response.text
-            else:
-                # Write some proper error handling code here
-                print("Error - status code: %s" % response.status_code)
-    else:
-        # Return the cached content
-        content = cached
-
-    return loads(content)
-
-
 def _grab_forecast_data(location):
     # Grab the forecast
-    query_url = _build_query(location.lower())
-    forecast = fetchJson(query_url)
-    return forecast
+    forecast = get_yahoo_weather(
+        location,
+        settings.YAHOO_APP_ID,
+        settings.YAHOO_CONSUMER_KEY,
+        settings.YAHOO_CONSUMER_SECRET
+    )
+    return loads(forecast)
 
 
 def _build_future_forecast(forecast):
@@ -62,7 +44,7 @@ def _build_future_forecast(forecast):
             "temp_low_f": float(daycast["low"]),
             "temp_low_c": F_TO_C(float(daycast["low"])),
             "taps": _test_taps_aff(daycast["code"], float(daycast["high"]), True),
-            "datetime": datetime.strptime(daycast["date"], '%d %b %Y'),
+            "datetime": datetime.utcfromtimestamp(daycast["date"]),
             "description": _get_description(daycast["code"])
         }
         for daycast in forecast
@@ -126,25 +108,22 @@ def _build_packet():
 def _build_forecast(packet, raw):
     # Test if we've got a valid location
     try:
-        if raw["query"]["count"] == 0:
+        if not raw["location"]:
             raise TapsLocationError()
-
     except KeyError:
-        raise TapsRequestError()
+        raise TapsRequestError("Bad data returned from weather service.")
 
     else:
         # Grab the proper data
         try:
-            try:
-                forecast = raw["query"]["results"]["channel"][0]
-            except KeyError:
-                forecast = raw["query"]["results"]["channel"]
+            forecast = raw["current_observation"]
+            location = raw["location"]["city"]
                 
             # Stats
-            packet["code"] = int(forecast["item"]["condition"]["code"])
+            packet["code"] = int(forecast["condition"]["code"])
             packet["temp_f"] = float(forecast["wind"]["chill"])
             packet["temp_c"] = F_TO_C(packet["temp_f"])
-            packet["location"] = forecast["location"]["city"]
+            packet["location"] = location
             packet["description"] = _get_description(packet["code"])
             packet["daytime"] = _is_daytime(forecast["astronomy"])
 
@@ -153,10 +132,10 @@ def _build_forecast(packet, raw):
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
+            packet["forecast"] = _build_future_forecast(raw["forecasts"])
 
         except KeyError:
-            raise TapsRequestError()
+            raise TapsRequestError("Cannot interpret weather data")
 
     return packet
 
