@@ -4,11 +4,12 @@ from urllib.parse import quote_plus
 from requests import get
 
 from www.models import Weather, Settings
-from .settings import URL
 from .status import AFF, OAN
+from .yahoo import get_yahoo_weather
 
 from django.utils.timezone import datetime
 from django.core.cache import cache
+from django.conf import settings
 
 
 F_TO_C = lambda f: (f-32.0) * (5.0 / 9.0)
@@ -23,34 +24,15 @@ class TapsRequestError(Exception):
     pass
 
 
-def _build_query(location):
-    return URL.replace("LOCATION", quote_plus(location))
-
-
-def fetchJson(url):
-    cache_key = hash(url)
-    cached = cache.get(cache_key)
-    content = ""
-    if not cached:
-            response = get(url)
-            if(response.ok):
-                cache.set(cache_key, response.text)
-                content = response.text
-            else:
-                # Write some proper error handling code here
-                print("Error - status code: %s" % response.status_code)
-    else:
-        # Return the cached content
-        content = cached
-
-    return loads(content)
-
-
 def _grab_forecast_data(location):
     # Grab the forecast
-    query_url = _build_query(location.lower())
-    forecast = fetchJson(query_url)
-    return forecast
+    forecast = get_yahoo_weather(
+        location,
+        settings.YAHOO_APP_ID,
+        settings.YAHOO_CONSUMER_KEY,
+        settings.YAHOO_CONSUMER_SECRET
+    )
+    return loads(forecast)
 
 
 def _build_future_forecast(forecast):
