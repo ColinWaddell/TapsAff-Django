@@ -2,6 +2,6 @@
     <ShortName>Taps Aff?</ShortName>
     <Description>Check the weather in your area</Description>
     <InputEncoding>UTF-8</InputEncoding>
-    <Image width="16" height="16" type="image/x-icon">http://www.taps-aff.co.uk/static/img/favicon_oan.ico</Image>
-    <Url type="text/html" method="get" template="http://www.taps-aff.co.uk/{searchTerms}"/>
+    <Image width="16" height="16" type="image/x-icon">https://www.taps-aff.co.uk/static/img/favicon_oan.ico</Image>
+    <Url type="text/html" method="get" template="https://www.taps-aff.co.uk/{searchTerms}"/>
 </OpenSearchDescription>
