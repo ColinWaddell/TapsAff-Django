@@ -44,7 +44,7 @@ def _build_future_forecast(forecast):
             "temp_low_f": float(daycast["low"]),
             "temp_low_c": F_TO_C(float(daycast["low"])),
             "taps": _test_taps_aff(daycast["code"], float(daycast["high"]), True),
-            "datetime": datetime.strptime(daycast["date"], '%d %b %Y'),
+            "datetime": datetime.utcfromtimestamp(daycast["date"]),
             "description": _get_description(daycast["code"])
         }
         for daycast in forecast
@@ -108,25 +108,22 @@ def _build_packet():
 def _build_forecast(packet, raw):
     # Test if we've got a valid location
     try:
-        if raw["query"]["count"] == 0:
+        if not raw["location"]:
             raise TapsLocationError()
-
     except KeyError:
-        raise TapsRequestError()
+        raise TapsRequestError("Bad data returned from weather service.")
 
     else:
         # Grab the proper data
         try:
-            try:
-                forecast = raw["query"]["results"]["channel"][0]
-            except KeyError:
-                forecast = raw["query"]["results"]["channel"]
+            forecast = raw["current_observation"]
+            location = raw["location"]["city"]
                 
             # Stats
-            packet["code"] = int(forecast["item"]["condition"]["code"])
+            packet["code"] = int(forecast["condition"]["code"])
             packet["temp_f"] = float(forecast["wind"]["chill"])
             packet["temp_c"] = F_TO_C(packet["temp_f"])
-            packet["location"] = forecast["location"]["city"]
+            packet["location"] = location
             packet["description"] = _get_description(packet["code"])
             packet["daytime"] = _is_daytime(forecast["astronomy"])
 
@@ -135,10 +132,10 @@ def _build_forecast(packet, raw):
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            packet["forecast"] = _build_future_forecast(forecast["item"]["forecast"])
+            packet["forecast"] = _build_future_forecast(raw["forecasts"])
 
         except KeyError:
-            raise TapsRequestError()
+            raise TapsRequestError("Cannot interpret weather data")
 
     return packet
 
