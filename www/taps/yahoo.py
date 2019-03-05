@@ -29,7 +29,7 @@ def get_yahoo_weather(
     consumer_secret = consumer_secret
     concat = '&'
     query = {
-        'location': location, 
+        'location': "%s,uk" % location, 
         'format': format
     }
     oauth = {
