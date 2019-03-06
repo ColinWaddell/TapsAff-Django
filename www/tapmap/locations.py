@@ -35,12 +35,6 @@ LOCATIONS = [
         "y": 0.78
     },
 
-    #{
-    #    "name": "Stirling",
-    #    "x": 0.595,
-    #    "y": 0.725
-    #},
-
     {
         "name": "Dundee",
         "x": 0.67,
@@ -54,7 +48,7 @@ LOCATIONS = [
     },
 
     {
-        "name": "Skye",
+        "name": "Isle+of+Skye",
         "x": 0.23,
         "y": 0.58
     },
