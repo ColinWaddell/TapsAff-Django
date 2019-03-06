@@ -24,9 +24,6 @@ def get_yahoo_weather(
 ):
     # Basic info
     method = 'GET'
-    app_id = app_id
-    consumer_key = consumer_key
-    consumer_secret = consumer_secret
     concat = '&'
     query = {
         'location': location,
