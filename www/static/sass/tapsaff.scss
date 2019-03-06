@@ -104,7 +104,6 @@ html {
             display: none;
         }  
 
-
         #btnMaps:checked + label > img#map_clothing{
             content: url(/map/weather);
         }   

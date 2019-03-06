@@ -1,11 +1,12 @@
 import time, uuid, urllib
+from json import loads
 import hmac, hashlib
 from base64 import b64encode
 
 
 def _generate_signature(key, data):
     key_bytes= bytes(key , 'utf-8')
-    data_bytes = bytes(data, 'utf-8') # Assumes `data` is also a string.
+    data_bytes = bytes(data, 'utf-8') 
     signature =  hmac.new(
         key_bytes,
         data_bytes,
@@ -19,8 +20,7 @@ def get_yahoo_weather(
     app_id,
     consumer_key,
     consumer_secret,
-    url='https://weather-ydn-yql.media.yahoo.com/forecastrss',
-    format='json'
+    url='https://weather-ydn-yql.media.yahoo.com/forecastrss'
 ):
     # Basic info
     method = 'GET'
@@ -29,8 +29,8 @@ def get_yahoo_weather(
     consumer_secret = consumer_secret
     concat = '&'
     query = {
-        'location': "%s,uk" % location, 
-        'format': format
+        'location': location,
+        'format': 'json'
     }
     oauth = {
         'oauth_consumer_key': consumer_key,
@@ -86,4 +86,4 @@ def get_yahoo_weather(
     request.add_header('Authorization', auth_header)
     request.add_header('X-Yahoo-App-Id', app_id)
     response = urllib.request.urlopen(request).read()
-    return response
+    return loads(response)

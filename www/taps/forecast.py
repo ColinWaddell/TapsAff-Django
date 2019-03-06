@@ -1,4 +1,3 @@
-from json import loads
 from urllib.request import urlopen
 from urllib.parse import quote_plus
 from requests import get
@@ -27,12 +26,12 @@ class TapsRequestError(Exception):
 def _grab_forecast_data(location):
     # Grab the forecast
     forecast = get_yahoo_weather(
-        location,
+        "%s,uk" % location,
         settings.YAHOO_APP_ID,
         settings.YAHOO_CONSUMER_KEY,
         settings.YAHOO_CONSUMER_SECRET
     )
-    return loads(forecast)
+    return forecast
 
 
 def _build_future_forecast(forecast):
