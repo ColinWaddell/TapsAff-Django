@@ -107,7 +107,7 @@ def _build_packet():
 def _build_forecast(packet, raw):
     # Test if we've got a valid location
     try:
-        if not raw["location"]:
+        if not raw["location"] or not raw["current_observation"]:
             raise TapsLocationError()
     except KeyError:
         raise TapsRequestError("Bad data returned from weather service.")
