@@ -53,7 +53,7 @@
             <h3>{{ weather.location }}'s forecast:</h3>
 
             <div class="row justify-content-center">
-                {% for daycast in weather.forecast|slice:"0:3" %}
+                {% for daycast in weather.forecast|slice:"1:4" %}
                 <div class="col-4 text-center tight-md">
                     {% include "day.html" with show_today=True %}
                 </div>
@@ -61,7 +61,7 @@
             </div>
             <br />
             <div class="row justify-content-center">
-                {% for daycast in weather.forecast|slice:"3:6" %}
+                {% for daycast in weather.forecast|slice:"4:7" %}
                 <div class="col-4 text-center tight-md">
                     {% include "day.html" with show_today=False %}
                 </div>
