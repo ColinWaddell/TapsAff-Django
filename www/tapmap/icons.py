@@ -33,7 +33,7 @@ def get_clothing():
         if (weather["taps"]["status"]=="aff"):
             clothing="tapsaff"
         else:
-            clothing = GetClothingIcon(weather["code"], weather["temp_c"])
+            clothing = GetClothingIcon(weather["code"], weather["temp_f"])
 
         icons.append({
             "src": "map/clothing/" + clothing + ".svg",
