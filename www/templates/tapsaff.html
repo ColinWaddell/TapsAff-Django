@@ -30,20 +30,6 @@
     </div>
 </div>
 
-<div class="container-fluid border-top" style="background: #fff0f0">
-    <div class="row">
-        <div class="col-sm text-center mt-4 mb-4" target="_blank">
-            <h2>
-                <a
-                    href="https://www.gov.scot/coronavirus-covid-19/"
-                    target="_blank"
-                    class="text-danger"
-                >Corona Virus in Scotland 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Lockdown Guidance</a>
-            </h2>
-        </div>
-    </div>
-</div>
-
 <div class="container-fluid forecast">
     <div class="row justify-content-center">
         
@@ -67,7 +53,7 @@
             <h3>{{ weather.location }}'s forecast:</h3>
 
             <div class="row justify-content-center">
-                {% for daycast in weather.forecast|slice:"1:4" %}
+                {% for daycast in weather.forecast|slice:"0:3" %}
                 <div class="col-4 text-center tight-md">
                     {% include "day.html" with show_today=True %}
                 </div>
@@ -75,7 +61,7 @@
             </div>
             <br />
             <div class="row justify-content-center">
-                {% for daycast in weather.forecast|slice:"4:7" %}
+                {% for daycast in weather.forecast|slice:"3:6" %}
                 <div class="col-4 text-center tight-md">
                     {% include "day.html" with show_today=False %}
                 </div>
