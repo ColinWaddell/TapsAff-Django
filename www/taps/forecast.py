@@ -33,17 +33,22 @@ def _grab_forecast_data(location):
 def _build_future_forecast(forecast):
     data = [
         {
-            "code": int(daycast["code"]),
-            "temp_high_f": float(daycast["high"]),
-            "temp_high_c": F_TO_C(float(daycast["high"])),
-            "temp_low_f": float(daycast["low"]),
-            "temp_low_c": F_TO_C(float(daycast["low"])),
-            "taps": _test_taps_aff(daycast["code"], float(daycast["high"]), True),
-            "datetime": datetime.utcfromtimestamp(daycast["date"]),
-            "description": _get_description(daycast["code"]),
+            "code": int(daycast["day"]["condition"]["code"]),
+            "temp_high_f": float(daycast["day"]["maxtemp_f"]),
+            "temp_high_c": float(daycast["day"]["maxtemp_c"]),
+            "temp_low_f": float(daycast["day"]["maxtemp_f"]),
+            "temp_low_c": float(daycast["day"]["maxtemp_c"]),
+            "taps": _test_taps_aff(
+                int(daycast["day"]["condition"]["code"]),
+                float(daycast["day"]["maxtemp_f"]),
+                True,
+            ),
+            "datetime": datetime.strptime(daycast["date"], "%Y-%m-%d"),
+            "description": _get_description(daycast["day"]["condition"]["code"]),
         }
         for daycast in forecast
     ]
+
     return data
 
 
@@ -71,14 +76,6 @@ def _get_description(code):
     return {"english": weather.description, "scots": weather.scots}
 
 
-def _is_daytime(astronomy):
-    sunrise = datetime.strptime(astronomy["sunrise"], "%I:%M %p")
-    sunset = datetime.strptime(astronomy["sunset"], "%I:%M %p")
-    now = datetime.now()
-
-    return sunrise.time() < now.time() and sunset.time() > now.time()
-
-
 def _build_packet():
     return {
         "temp_f": 0,
@@ -99,7 +96,7 @@ def _build_packet():
 def _build_forecast(packet, raw):
     # Test if we've got a valid location
     try:
-        if not raw["location"] or not raw["current_observation"]:
+        if not raw["location"] or not raw["current"]:
             raise TapsLocationError()
     except KeyError:
         raise TapsRequestError("Bad data returned from weather service.")
@@ -107,16 +104,16 @@ def _build_forecast(packet, raw):
     else:
         # Grab the proper data
         try:
-            forecast = raw["current_observation"]
-            location = raw["location"]["city"]
+            forecast = raw["current"]
+            location = raw["location"]["name"]
 
             # Stats
             packet["code"] = int(forecast["condition"]["code"])
-            packet["temp_f"] = float(forecast["wind"]["chill"])
+            packet["temp_f"] = float(forecast["feelslike_f"])
             packet["temp_c"] = F_TO_C(packet["temp_f"])
             packet["location"] = location
             packet["description"] = _get_description(packet["code"])
-            packet["daytime"] = _is_daytime(forecast["astronomy"])
+            packet["daytime"] = forecast["is_day"] == "1"
 
             # Taps Aff?
             packet["taps"] = _test_taps_aff(
@@ -125,7 +122,7 @@ def _build_forecast(packet, raw):
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            packet["forecast"] = _build_future_forecast(raw["forecasts"])
+            packet["forecast"] = _build_future_forecast(raw["forecast"]["forecastday"])
 
         except KeyError:
             raise TapsRequestError("Cannot interpret weather data")
