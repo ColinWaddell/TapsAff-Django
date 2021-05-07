@@ -11,13 +11,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 import environ
 import os
+
 root = environ.Path(__file__)
 
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
 BASE_DIR = root()
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,17 +28,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'taps-aff.co.uk',
-    'api.taps-aff.co.uk',
-    'www.taps-aff.co.uk'
+    "127.0.0.1",
+    "localhost",
+    "taps-aff.co.uk",
+    "api.taps-aff.co.uk",
+    "www.taps-aff.co.uk",
 ]
 
 LOGIN_URL = "/admin/login"
@@ -45,70 +46,66 @@ LOGIN_URL = "/admin/login"
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'www.apps.WWWConfig',
-    'www.templatetags.weather_icon',
-    'www.templatetags.clothing_icon',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "www.apps.WWWConfig",
+    "www.templatetags.weather_icon",
+    "www.templatetags.clothing_icon",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'tapsaff.urls'
+ROOT_URLCONF = "tapsaff.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-                os.path.join(BASE_DIR, 'www', 'templates'),
-            ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, "www", "templates"),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'tapsaff.wsgi.application'
+WSGI_APPLICATION = "tapsaff.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': env.db()
-}
+DATABASES = {"default": env.db()}
 
 # Cache
 # http://equallytrue.blogspot.co.uk/2012/04/how-to-cache-outgoing-api-calls-in.html
 
-CACHES = {
-    'default': eval(env('CACHE', cast=str)) # Must do better
-}
+CACHES = {"default": eval(env("CACHE", cast=str))}  # Must do better
 
 
 # Session
 # https://docs.djangoproject.com/en/2.0/topics/http/sessions/
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 
 # Password validation
@@ -116,16 +113,16 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -133,21 +130,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'Europe/London'
+TIME_ZONE = "Europe/London"
 
 USE_I18N = True
 
 USE_L10N = False
 
 DATETIME_INPUT_FORMATS = [
-    '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
+    "%Y-%m-%d %H:%M",  # '2006-10-25 14:30'
 ]
 
-public_root = root.path('/')
+public_root = root.path("/")
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -155,14 +152,12 @@ STATIC_URL = '/static/'
 if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 else:
-    STATIC_ROOT = public_root('static')
+    STATIC_ROOT = public_root("static")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "www/static"),
 ]
 
 
-# Yahoo Developer Settings
-YAHOO_APP_ID = env('YAHOO_APP_ID')
-YAHOO_CONSUMER_KEY = env('YAHOO_CONSUMER_KEY')
-YAHOO_CONSUMER_SECRET = env('YAHOO_CONSUMER_SECRET')
+# Weather.com Settings
+WEATHER_API_ID = env("WEATHER_API_ID")
