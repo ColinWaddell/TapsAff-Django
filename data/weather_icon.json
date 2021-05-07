@@ -1,1 +1,163 @@
-[{"model": "www.weathericon", "pk": 1, "fields": {"icon": "wind_cloud_snow"}}, {"model": "www.weathericon", "pk": 2, "fields": {"icon": "sun_clear"}}, {"model": "www.weathericon", "pk": 3, "fields": {"icon": "lightning_night"}}, {"model": "www.weathericon", "pk": 4, "fields": {"icon": "drizzle"}}, {"model": "www.weathericon", "pk": 5, "fields": {"icon": "cloud"}}, {"model": "www.weathericon", "pk": 6, "fields": {"icon": "showers"}}, {"model": "www.weathericon", "pk": 7, "fields": {"icon": "cloud_wind_night"}}, {"model": "www.weathericon", "pk": 8, "fields": {"icon": "temp_high"}}, {"model": "www.weathericon", "pk": 9, "fields": {"icon": "cloud_sun"}}, {"model": "www.weathericon", "pk": 10, "fields": {"icon": "lightning"}}, {"model": "www.weathericon", "pk": 11, "fields": {"icon": "cloud_snow"}}, {"model": "www.weathericon", "pk": 12, "fields": {"icon": "clear_night"}}, {"model": "www.weathericon", "pk": 13, "fields": {"icon": "snow_night"}}, {"model": "www.weathericon", "pk": 14, "fields": {"icon": "rain_lightning"}}, {"model": "www.weathericon", "pk": 15, "fields": {"icon": "rain"}}, {"model": "www.weathericon", "pk": 16, "fields": {"icon": "fog"}}, {"model": "www.weathericon", "pk": 17, "fields": {"icon": "cloud_night"}}, {"model": "www.weathericon", "pk": 18, "fields": {"icon": "rain_snow"}}, {"model": "www.weathericon", "pk": 19, "fields": {"icon": "windy"}}, {"model": "www.weathericon", "pk": 20, "fields": {"icon": "cloud_rain_night"}}, {"model": "www.weathericon", "pk": 21, "fields": {"icon": "wind_rain"}}, {"model": "www.weathericon", "pk": 22, "fields": {"icon": "wind_lightning"}}, {"model": "www.weathericon", "pk": 23, "fields": {"icon": "temp_low"}}]
+[
+    {
+        "model": "www.weathericon",
+        "pk": 1,
+        "fields": {
+            "icon": "wind_cloud_snow"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 2,
+        "fields": {
+            "icon": "sun_clear"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 3,
+        "fields": {
+            "icon": "lightning_night"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 4,
+        "fields": {
+            "icon": "drizzle"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 5,
+        "fields": {
+            "icon": "cloud"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 6,
+        "fields": {
+            "icon": "showers"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 7,
+        "fields": {
+            "icon": "cloud_wind_night"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 8,
+        "fields": {
+            "icon": "temp_high"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 9,
+        "fields": {
+            "icon": "cloud_sun"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 10,
+        "fields": {
+            "icon": "lightning"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 11,
+        "fields": {
+            "icon": "cloud_snow"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 12,
+        "fields": {
+            "icon": "clear_night"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 13,
+        "fields": {
+            "icon": "snow_night"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 14,
+        "fields": {
+            "icon": "rain_lightning"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 15,
+        "fields": {
+            "icon": "rain"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 16,
+        "fields": {
+            "icon": "fog"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 17,
+        "fields": {
+            "icon": "cloud_night"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 18,
+        "fields": {
+            "icon": "rain_snow"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 19,
+        "fields": {
+            "icon": "windy"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 20,
+        "fields": {
+            "icon": "cloud_rain_night"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 21,
+        "fields": {
+            "icon": "wind_rain"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 22,
+        "fields": {
+            "icon": "wind_lightning"
+        }
+    },
+    {
+        "model": "www.weathericon",
+        "pk": 23,
+        "fields": {
+            "icon": "temp_low"
+        }
+    }
+]
