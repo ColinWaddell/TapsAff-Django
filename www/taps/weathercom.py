@@ -6,7 +6,7 @@ def build_url(location, api_key):
         "http://api.weatherapi.com/v1/forecast.json?"
         f"key={api_key}&"
         f"q={location}&"
-        "days=7&"
+        "days=3&"
         "aqi=no&"
         "alerts=no"
     )

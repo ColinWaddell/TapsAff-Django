@@ -34,7 +34,7 @@
     <div class="row justify-content-center">
         
         <!-- Map -->
-        <div class="col-xl-5 col-md-6 map tight-md">
+        <div class="col-xl-4 col-md-5 map tight-md">
             <h3>Scotland:</h3>
 
             <div class="canvas">
@@ -53,21 +53,12 @@
             <h3>{{ weather.location }}'s forecast:</h3>
 
             <div class="row justify-content-center">
-                {% for daycast in weather.forecast|slice:"1:4" %}
+                {% for daycast in weather.forecast|slice:"0:3" %}
                 <div class="col-4 text-center tight-md">
                     {% include "day.html" with show_today=False %}
                 </div>
                 {% endfor %}
             </div>
-            <br />
-            <div class="row justify-content-center">
-                {% for daycast in weather.forecast|slice:"4:7" %}
-                <div class="col-4 text-center tight-md">
-                    {% include "day.html" with show_today=False %}
-                </div>
-                {% endfor %}
-            </div>
-
         </div>
     </div>
 </div>

@@ -4,7 +4,6 @@ from requests import get
 
 from www.models import Weather, Settings
 from .status import AFF, OAN
-from .yahoo import get_yahoo_weather
 from .weathercom import get_weather
 
 from django.utils.timezone import datetime
