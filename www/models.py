@@ -29,7 +29,6 @@ class Weather(models.Model):
     description = models.TextField()
     scots = models.TextField()
     terrible = models.BooleanField()
-    nighttime = models.BooleanField(default=False)
     delta = models.FloatField(default=0)
     colder = models.FloatField(default=-273.15)
     cold = models.FloatField(default=5)

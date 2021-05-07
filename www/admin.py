@@ -9,7 +9,6 @@ class WeatherAdmin(admin.ModelAdmin):
         'scots',
         'terrible',
         'delta',
-        'nighttime',
         'colder',
         'cold',
         'fair',
