@@ -69,7 +69,7 @@ class Command(BaseCommand):
                     continue
 
                 # Check if we're about to duplicate something
-                if Weather.objects.filter(code=row[CODE]).exists():
+                if Weather.objects.filter(code=int(row[CODE])).exists():
                     print(f"FAIL - {row[0]} ({row[1]}) already in database")
                     continue
 
@@ -83,15 +83,15 @@ class Command(BaseCommand):
 
                 # Create model
                 weather = Weather(
-                    code=row[CODE],
-                    description=row[DAY],
-                    scots=row[SCOTS],
-                    terrible=row[TERRIBLE],
-                    delta=row[DELTA],
-                    colder=row[COLDER],
-                    cold=row[COLD],
-                    fair=row[FAIR],
-                    warm=row[WARM],
+                    code=int(row[CODE]),
+                    description=str(row[DAY]),
+                    scots=str(row[SCOTS]),
+                    terrible=(row[TERRIBLE] == "1"),
+                    delta=float(row[DELTA]),
+                    colder=float(row[COLDER]),
+                    cold=float(row[COLD]),
+                    fair=float(row[FAIR]),
+                    warm=float(row[WARM]),
                     clothing_colder=clothing_colder,
                     clothing_cold=clothing_cold,
                     clothing_fair=clothing_fair,
