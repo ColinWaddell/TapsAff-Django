@@ -68,6 +68,11 @@ class Command(BaseCommand):
                         sys.exit()
                     continue
 
+                # Check if we're about to duplicate something
+                if Weather.objects.filter(code=row[CODE]).exists():
+                    print(f"FAIL - {row[0]} ({row[1]}) already in database")
+                    continue
+
                 # Look up fks
                 clothing_colder = ClothingIcon.objects.get(icon=row[CLOTHING_COLDER])
                 clothing_cold = ClothingIcon.objects.get(icon=row[CLOTHING_COLD])
@@ -95,4 +100,4 @@ class Command(BaseCommand):
                     weather_night=weather_night,
                 )
                 weather.save()
-                print(f"{row[0]} ({row[1]}) added to database")
+                print(f"SUCCESS - {row[0]} ({row[1]}) added to database")
