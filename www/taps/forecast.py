@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from urllib.parse import quote_plus
+from urllib.error import HTTPError
 from requests import get
 
 from www.models import Weather, Settings
@@ -25,8 +26,17 @@ class TapsRequestError(Exception):
 
 def _grab_forecast_data(location):
     # Grab the forecast
-    forecast = get_weather(location, settings.WEATHER_API_ID)
-    return forecast
+    try:
+        cache_key = f"forecast:{location}"
+        cached = cache.get(cache_key)
+        if not cached:
+            forecast = get_weather(location, settings.WEATHER_API_ID)
+            cache.set(cache_key, forecast)
+        else:
+            forecast = cached
+        return forecast
+    except HTTPError:
+        raise TapsLocationError
 
 
 def _build_future_forecast(forecast):
