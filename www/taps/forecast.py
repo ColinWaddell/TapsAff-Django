@@ -112,7 +112,7 @@ def _build_forecast(packet, raw):
             packet["temp_c"] = F_TO_C(packet["temp_f"])
             packet["location"] = location
             packet["description"] = _get_description(packet["code"])
-            packet["daytime"] = forecast["is_day"] == "1"
+            packet["daytime"] = int(forecast["is_day"]) == 1
 
             # Taps Aff?
             packet["taps"] = _test_taps_aff(
