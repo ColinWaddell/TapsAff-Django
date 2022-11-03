@@ -39,7 +39,7 @@ def _grab_forecast_data(location):
         raise TapsLocationError
 
 
-def _build_future_forecast(forecast):
+def _build_daily_forecast(forecast):
     data = [
         {
             "code": int(daycast["day"]["condition"]["code"]),
@@ -54,6 +54,26 @@ def _build_future_forecast(forecast):
             ),
             "datetime": datetime.strptime(daycast["date"], "%Y-%m-%d"),
             "description": _get_description(daycast["day"]["condition"]["code"]),
+            "hourly": [
+                {
+                    "hour": hour,
+                    "temp_f": float(hourcast["temp_f"]),
+                    "temp_c": float(hourcast["temp_c"]),
+                    "code": int(hourcast["condition"]["code"]),
+                    "taps":  _test_taps_aff(
+                        int(hourcast["condition"]["code"]),
+                        float(hourcast["temp_f"]),
+                        True,
+                    ),
+                    "description": _get_description(hourcast["condition"]["code"]),
+                    "precip_mm": float(hourcast["precip_mm"]),
+                    "will_it_rain": hourcast["will_it_rain"],
+                    "chance_of_rain": hourcast["chance_of_rain"],
+                    "will_it_snow": hourcast["will_it_snow"],
+                    "chance_of_snow": hourcast["chance_of_snow"],
+                }
+                for hour, hourcast in enumerate(daycast["hour"])
+            ],
         }
         for daycast in forecast
     ]
@@ -131,7 +151,7 @@ def _build_forecast(packet, raw):
             packet["aff"] = packet["taps"]["status"] == AFF
 
             # Produce a forecast
-            packet["forecast"] = _build_future_forecast(raw["forecast"]["forecastday"])
+            packet["forecast"] = _build_daily_forecast(raw["forecast"]["forecastday"])
 
         except KeyError:
             raise TapsRequestError("Cannot interpret weather data")
