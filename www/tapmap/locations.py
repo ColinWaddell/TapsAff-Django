@@ -18,7 +18,7 @@ LOCATIONS = [
     },
 
     {
-        "name": "Ayrshire",
+        "name": "Cumnock",
         "x": 0.525,
         "y": 0.825
     },
