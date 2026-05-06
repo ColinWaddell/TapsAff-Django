@@ -11,6 +11,7 @@ from .taps import forecast
 
 class Index(View):
     def get(self, request, location=None):
+        # Resolve requested location, falling back to session then default.
         if not location:
             location = request.session.get("location")
 
