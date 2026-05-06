@@ -94,16 +94,20 @@ WSGI_APPLICATION = "tapsaff.wsgi.application"
 DATABASES = {"default": env.db()}
 
 # Cache
-# Backend is configured by the CACHE env var as a django-environ cache URL
-# (e.g. "locmem://", "dummy://", "redis://host:6379/0"). Defaults to
-# in-process locmem so the dev server works out of the box; production
-# should set CACHE explicitly.
+# Backend is configured by the CACHE env var as a django-environ cache URL.
+# Supported schemes (django-environ 0.4.5):
+#   locmemcache://  - in-process LocMemCache (dev default)
+#   dummycache://   - DummyCache (no-op, useful for tests)
+#   memcache://host:11211
+#   rediscache://host:6379/0  (requires django-redis on Django < 4)
+#   filecache:///abs/path
+#   dbcache://table_name
 #
 # CACHE_MAP_TIMEOUT controls how long the rendered SVG map is cached.
 # Forecast cache TTL is taken from the Settings.cache_seconds model field
 # at call time, so it can be tuned without redeploys.
 
-CACHES = {"default": env.cache_url("CACHE", default="locmem://")}
+CACHES = {"default": env.cache_url("CACHE", default="locmemcache://")}
 
 CACHE_MAP_TIMEOUT = env.int("CACHE_MAP_TIMEOUT", default=3600)
 
