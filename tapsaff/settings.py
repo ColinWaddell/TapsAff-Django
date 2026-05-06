@@ -17,11 +17,10 @@ root = environ.Path(__file__)
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
-BASE_DIR = root()
-DEBUG = env("DEBUG")
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DEBUG = env("DEBUG")
 
 
 # Quick-start development settings - unsuitable for production
@@ -53,8 +52,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "www.apps.WWWConfig",
-    "www.templatetags.weather_icon",
-    "www.templatetags.clothing_icon",
 ]
 
 MIDDLEWARE = [
@@ -97,9 +94,18 @@ WSGI_APPLICATION = "tapsaff.wsgi.application"
 DATABASES = {"default": env.db()}
 
 # Cache
-# http://equallytrue.blogspot.co.uk/2012/04/how-to-cache-outgoing-api-calls-in.html
+# Backend is configured by the CACHE env var as a django-environ cache URL
+# (e.g. "locmem://", "dummy://", "redis://host:6379/0"). Defaults to
+# in-process locmem so the dev server works out of the box; production
+# should set CACHE explicitly.
+#
+# CACHE_MAP_TIMEOUT controls how long the rendered SVG map is cached.
+# Forecast cache TTL is taken from the Settings.cache_seconds model field
+# at call time, so it can be tuned without redeploys.
 
-CACHES = {"default": eval(env("CACHE", cast=str))}  # Must do better
+CACHES = {"default": env.cache_url("CACHE", default="locmem://")}
+
+CACHE_MAP_TIMEOUT = env.int("CACHE_MAP_TIMEOUT", default=3600)
 
 
 # Session
