@@ -1,0 +1,28 @@
+[project]
+name = "tapsaff"
+version = "0.1.0"
+description = "TapsAff - Glasgow weather web app (taps-aff.co.uk)"
+requires-python = ">=3.10"
+dependencies = [
+    "Django==5.2.14",
+    "django-environ==0.13.0",
+    "gunicorn>=22",
+]
+
+# Tells uv this is an application, not a buildable package - we don't
+# publish to PyPI, we just want the deps installed.
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade (suggests modern Python idioms)
+    "B",   # bugbear (likely-bug patterns)
+]

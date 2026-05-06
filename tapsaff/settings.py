@@ -129,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Europe/London"
 USE_I18N = True
-USE_TZ = False  # preserve pre-5.0 default; modernise pass will switch to True
+USE_TZ = True
 
 DATETIME_INPUT_FORMATS = [
     "%Y-%m-%d %H:%M",  # '2006-10-25 14:30'
