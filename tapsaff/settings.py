@@ -81,11 +81,12 @@ DATABASES = {"default": env.db()}
 
 # Cache
 # Backend is configured by the CACHE env var as a django-environ cache URL.
-# Supported schemes (django-environ 0.4.5):
-#   locmemcache://  - in-process LocMemCache (dev default)
-#   dummycache://   - DummyCache (no-op, useful for tests)
-#   memcache://host:11211
-#   rediscache://host:6379/0  (requires django-redis on Django < 4)
+# Supported schemes:
+#   locmemcache://                - in-process LocMemCache (dev default)
+#   dummycache://                 - DummyCache (no-op, useful for tests)
+#   rediscache://host:6379/0      - Django 5.2's built-in RedisCache (production)
+#   redis://host:6379/0           - alias for rediscache:// since django-environ 0.10
+#   memcache://host:11211         - MemcachedCache
 #   filecache:///abs/path
 #   dbcache://table_name
 #
@@ -93,9 +94,9 @@ DATABASES = {"default": env.db()}
 # Forecast cache TTL is taken from the Settings.cache_seconds model field
 # at call time, so it can be tuned without redeploys.
 
-# env.cache_url() trips on an empty CACHE env var (KeyError: '') because
-# urlparse('') returns an empty scheme. Strip-and-fall-back makes the
-# default kick in regardless of how the env var got cleared.
+# Strip-and-fall-back: an empty CACHE env var would otherwise produce a
+# parse error. This makes the default kick in regardless of how the env
+# var got cleared.
 _cache_url = env.str("CACHE", default="locmemcache://").strip() or "locmemcache://"
 CACHES = {"default": env.cache_url_config(_cache_url)}
 

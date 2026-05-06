@@ -1,2 +1,2 @@
 Django==5.2.14
-django-environ==0.4.5
+django-environ==0.13.0
