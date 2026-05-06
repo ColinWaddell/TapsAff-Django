@@ -25,16 +25,22 @@ class TapsRequestError(Exception):
 
 
 def _grab_forecast_data(location):
-    # Grab the forecast
+    """Fetch a forecast for `location`, caching by location name.
+
+    TTL is taken from the singleton Settings row's `cache_seconds` field
+    so it can be tuned at runtime via the admin without a redeploy. If
+    no Settings row exists yet (fresh install) the cache uses the
+    backend's default timeout.
+    """
+    cache_key = f"forecast:{location}"
+    config = CONFIG()
+    timeout = config.cache_seconds if config else None
     try:
-        cache_key = f"forecast:{location}"
-        cached = cache.get(cache_key)
-        if not cached:
-            forecast = get_weather(location, settings.WEATHER_API_ID)
-            cache.set(cache_key, forecast)
-        else:
-            forecast = cached
-        return forecast
+        return cache.get_or_set(
+            cache_key,
+            lambda: get_weather(location, settings.WEATHER_API_ID),
+            timeout=timeout,
+        )
     except HTTPError:
         raise TapsLocationError
 

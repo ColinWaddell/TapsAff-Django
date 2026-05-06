@@ -1,15 +1,16 @@
+from django.conf import settings
+from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
-from.models import Settings
-CONFIG = lambda: Settings.objects.first()
-
+from .models import Settings
 from .taps import forecast
 from .tapmap import icons
 
-from django.core.cache import cache
+
+CONFIG = lambda: Settings.objects.first()
 
 
 class Index(View):
@@ -53,17 +54,16 @@ class Api(View):
 class Map(View):
     def get(self, request, show=''):
         cache_key = f"map:{show}"
-        cached = cache.get(cache_key)
 
-        if not cached:
+        def _build_map():
             map_icons = icons.get_clothing() if show == 'clothing' else icons.get_weather()
-            map_data = render(request, 'map/map.svg', {
+            return render(request, 'map/map.svg', {
                 'icons': map_icons,
                 'width': icons.C_WIDTH,
-                'height': icons.C_HEIGHT
+                'height': icons.C_HEIGHT,
             })
-            cache.set(cache_key, map_data)
-        else:
-            map_data = cached
 
+        map_data = cache.get_or_set(
+            cache_key, _build_map, timeout=settings.CACHE_MAP_TIMEOUT,
+        )
         return HttpResponse(map_data, content_type="image/svg+xml")
