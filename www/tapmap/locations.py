@@ -18,7 +18,7 @@ LOCATIONS = [
     },
 
     {
-        "name": "Ayrshire",
+        "name": "Cumnock",
         "x": 0.525,
         "y": 0.825
     },
@@ -54,7 +54,7 @@ LOCATIONS = [
     },
 
     {
-        "name": "Orkney",
+        "name": "Kirkwall",
         "x": 0.60,
         "y": 0.295
     },
@@ -78,7 +78,7 @@ LOCATIONS = [
     },
 
     {
-        "name": "Fort+William",
+        "name": "Kinlochleven",
         "x": 0.44,
         "y": 0.63
     },

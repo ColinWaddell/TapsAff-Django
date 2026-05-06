@@ -14,40 +14,55 @@ from django.core.cache import cache
 
 class Index(View):
     def get(self, request, location=None):
-
+        # Resolve requested location or fallback to session/default for keying
         if not location:
             try:
                 location = request.session['location']
             except KeyError:
                 location = None
 
-        weather = forecast.query(location, location_default=CONFIG().location)
+        default_loc = CONFIG().location
+        cache_key = f"index:{location or default_loc}"
+        cached = cache.get(cache_key)
+
+        if cached:
+            # Keep session location in sync even on cache hit
+            request.session['location'] = (location or default_loc)
+            return cached
+
+        # Cache miss: compute weather, render, cache response
+        weather = forecast.query(location, location_default=default_loc)
         request.session['location'] = weather['location']
-        return render(request, 'tapsaff.html', {
+        response = render(request, 'tapsaff.html', {
             "weather": weather,
             "settings": CONFIG
         })
-    
+        cache.set(cache_key, response)
+        return response
+
     def post(self, request):
         location = request.POST["location"]
         return redirect("www:index", location=location)
 
+
 class Api(View):
     def get(self, request, location=None):
-        
-        data = dict()
+        cache_key = f"api:{location or 'none'}"
+        cached = cache.get(cache_key)
+        if cached:
+            return cached
 
         if not location:
-            data["error"] = "location not supplied"
+            data = {"error": "location not supplied"}
         else:
             data = forecast.query(location)
-        
-        if data["place_error"]:
-            data = {
-                "error": data["place_error"]
-            }
+            if data.get("place_error"):
+                data = {"error": data["place_error"]}
 
-        return JsonResponse(data)
+        response = JsonResponse(data)
+        cache.set(cache_key, response)
+        return response
+
 
 
 class Map(View):
