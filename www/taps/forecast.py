@@ -168,18 +168,27 @@ def is_taps_aff(code, temp_f, daytime=True):
 
 
 def query(location_request=None, location_default="Glasgow"):
-    # This is where we'll fill up our response
+    """Look up the weather for `location_request`, falling back to
+    `location_default` if missing or unknown. Always returns a packet -
+    if both lookups fail, the packet's `place_error` field is set so
+    callers can render a graceful message instead of getting a 500.
+    """
     packet = _build_packet()
 
     if location_request:
         try:
             forecast_raw = _grab_forecast_data(location_request)
-            packet = _build_forecast(packet, forecast_raw)
-            return packet
+            return _build_forecast(packet, forecast_raw)
         except TapsLocationError:
-            packet["place_error"] = "Location '%s' unknown" % location_request
+            packet["place_error"] = f"Location '{location_request}' unknown"
 
-    # Either there was a search error or no location was supplied
-    forecast_raw = _grab_forecast_data(location_default)
-    packet = _build_forecast(packet, forecast_raw)
-    return packet
+    # Fall back to the default. If that ALSO fails (API down, expired
+    # key, malformed response), surface it via place_error rather than
+    # bubbling up as a 500.
+    try:
+        forecast_raw = _grab_forecast_data(location_default)
+        return _build_forecast(packet, forecast_raw)
+    except (TapsLocationError, TapsRequestError) as exc:
+        if not packet["place_error"]:
+            packet["place_error"] = f"Forecast unavailable: {exc}"
+        return packet

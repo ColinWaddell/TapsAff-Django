@@ -225,3 +225,44 @@ class ForecastHelperTests(TestCase):
 
     def test_is_taps_aff_false_at_night(self):
         self.assertFalse(is_taps_aff(code=1000, temp_f=80.0, daytime=False))
+
+
+# --------------------------------------------------------------------------
+# Resilience tests
+# --------------------------------------------------------------------------
+
+class QueryResilienceTests(TestCase):
+    """forecast.query() must always return a packet, never raise, even when
+    the underlying weather API is unavailable."""
+
+    def setUp(self):
+        _make_settings()
+
+    @mock.patch("www.taps.forecast._grab_forecast_data")
+    def test_default_location_failure_returns_packet_with_error(self, mock_grab):
+        # Simulate API down: every call raises TapsLocationError
+        from www.taps.forecast import TapsLocationError, query
+        mock_grab.side_effect = TapsLocationError
+        packet = query()
+        self.assertIsNotNone(packet)
+        self.assertTrue(packet["place_error"])
+
+    @mock.patch("www.taps.forecast._grab_forecast_data")
+    def test_user_location_unknown_falls_through_to_default(self, mock_grab):
+        # First call (user location) fails, second call (default) succeeds
+        from www.taps.forecast import TapsLocationError
+        mock_grab.side_effect = [TapsLocationError, {
+            "location": {"name": "Glasgow"},
+            "current": {
+                "condition": {"code": 1000},
+                "feelslike_f": 50.0,
+                "is_day": 1,
+            },
+            "forecast": {"forecastday": []},
+        }]
+        _make_weather(code=1000, terrible=False, delta=0.0,
+                      description="Sunny", scots="Braw")
+        from www.taps.forecast import query
+        packet = query(location_request="Atlantis")
+        self.assertEqual(packet["location"], "Glasgow")
+        self.assertIn("Atlantis", packet["place_error"])
