@@ -26,6 +26,7 @@ ALLOWED_HOSTS = [
     "taps-aff.co.uk",
     "api.taps-aff.co.uk",
     "www.taps-aff.co.uk",
+    "demo.taps-aff.co.uk",
 ]
 
 LOGIN_URL = "/admin/login"
@@ -149,6 +150,7 @@ else:
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "www/static"),
 ]
+
 
 
 # Weather.com Settings
