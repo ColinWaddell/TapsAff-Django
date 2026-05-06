@@ -112,6 +112,15 @@ CACHES = {"default": env.cache_url("CACHE", default="locmemcache://")}
 CACHE_MAP_TIMEOUT = env.int("CACHE_MAP_TIMEOUT", default=3600)
 
 
+# Django 3.2+ asks projects to declare their default PK type. The existing
+# migrations were generated with AutoField (32-bit) and the tables in this
+# app are tiny (a few dozen rows of weather/clothing icons), so AutoField
+# remains correct - using BigAutoField would require a migration touching
+# every model PK with no real-world benefit.
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+
 # Session
 # https://docs.djangoproject.com/en/2.0/topics/http/sessions/
 
