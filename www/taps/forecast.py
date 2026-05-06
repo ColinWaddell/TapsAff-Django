@@ -1,19 +1,16 @@
-from urllib.request import urlopen
-from urllib.parse import quote_plus
 from urllib.error import HTTPError
-from requests import get
 
-from www.models import Weather, Settings
+from django.conf import settings
+from django.core.cache import cache
+from django.utils.timezone import datetime
+
+from www.models import Settings, Weather
+
 from .status import AFF, OAN
 from .weathercom import get_weather
 
-from django.utils.timezone import datetime
-from django.core.cache import cache
-from django.conf import settings
-
 
 F_TO_C = lambda f: (f - 32.0) * (5.0 / 9.0)
-CONFIG = lambda: Settings.objects.first()
 
 
 class TapsLocationError(Exception):
@@ -33,7 +30,7 @@ def _grab_forecast_data(location):
     backend's default timeout.
     """
     cache_key = f"forecast:{location}"
-    config = CONFIG()
+    config = Settings.current()
     timeout = config.cache_seconds if config else None
     try:
         return cache.get_or_set(
@@ -51,8 +48,8 @@ def _build_daily_forecast(forecast):
             "code": int(daycast["day"]["condition"]["code"]),
             "temp_high_f": float(daycast["day"]["maxtemp_f"]),
             "temp_high_c": float(daycast["day"]["maxtemp_c"]),
-            "temp_low_f": float(daycast["day"]["maxtemp_f"]),
-            "temp_low_c": float(daycast["day"]["maxtemp_c"]),
+            "temp_low_f": float(daycast["day"]["mintemp_f"]),
+            "temp_low_c": float(daycast["day"]["mintemp_c"]),
             "taps": _test_taps_aff(
                 int(daycast["day"]["condition"]["code"]),
                 float(daycast["day"]["maxtemp_f"]),
@@ -66,7 +63,7 @@ def _build_daily_forecast(forecast):
                     "temp_f": float(hourcast["temp_f"]),
                     "temp_c": float(hourcast["temp_c"]),
                     "code": int(hourcast["condition"]["code"]),
-                    "taps":  _test_taps_aff(
+                    "taps": _test_taps_aff(
                         int(hourcast["condition"]["code"]),
                         float(hourcast["temp_f"]),
                         True,
@@ -95,12 +92,12 @@ def _test_taps_aff(code, temp_f, daytime):
     taps = {"status": OAN, "message": ""}
 
     if not Weather.objects.filter(code=code, terrible=True) and daytime:
+        config = Settings.current()
         delta = Weather.objects.get(code=code).delta
-        theshold = CONFIG().threshold + delta
-        if temp_f >= theshold:
+        threshold = config.threshold + delta
+        if temp_f >= threshold:
             taps["status"] = AFF
-
-        elif temp_f + CONFIG().delta > theshold:
+        elif temp_f + config.delta > threshold:
             taps["message"] = "...but only by a bawhair!"
 
     return taps
@@ -171,7 +168,6 @@ def is_taps_aff(code, temp_f, daytime=True):
 
 
 def query(location_request=None, location_default="Glasgow"):
-
     # This is where we'll fill up our response
     packet = _build_packet()
 
@@ -180,17 +176,10 @@ def query(location_request=None, location_default="Glasgow"):
             forecast_raw = _grab_forecast_data(location_request)
             packet = _build_forecast(packet, forecast_raw)
             return packet
-
         except TapsLocationError:
             packet["place_error"] = "Location '%s' unknown" % location_request
 
-    # Either there was a search error
-    # or no location was supplied
+    # Either there was a search error or no location was supplied
     forecast_raw = _grab_forecast_data(location_default)
     packet = _build_forecast(packet, forecast_raw)
     return packet
-
-
-if __name__ == "__main__":
-    blah = query("glasgow")
-    print(blah)
