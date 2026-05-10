@@ -3,15 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 db.sqlite3
-www/static/css/
-/static/
 *-lock.json
 *.map
 .DS_Store
 _crap/
 
-www/static/img/taps_clothing.png
-www/static/img/taps_weather.png
 
 # C extensions
 *.so
