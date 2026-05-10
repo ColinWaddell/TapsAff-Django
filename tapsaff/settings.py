@@ -140,18 +140,13 @@ public_root = root.path("/")
 
 STATIC_URL = "/static/"
 
-
 # Static files (CSS, JavaScript, Images)
-if DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
-else:
-    STATIC_ROOT = public_root("static")
+# Keep static output configurable for Nix/systemd deployments.
+STATIC_ROOT = env.str("STATIC_ROOT", default=os.path.join(BASE_DIR, "static")).strip()
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "www/static"),
 ]
-
-
 
 # Weather.com Settings
 WEATHER_API_ID = env("WEATHER_API_ID")
