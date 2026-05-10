@@ -1,0 +1,244 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.taps-area {
+    background: white;
+    padding-bottom: 40px;
+
+    h1 {
+        text-align: center;
+        font-weight: 800;
+        padding-top: 60px;
+
+        a {
+            color: black;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 2px;
+            transition: 0.1s;
+
+            &:hover{
+                color: black;
+                text-decoration: none;
+                border-bottom: 2px dashed black;
+            }
+        }
+    }
+
+    h2 {
+        font-size: $h1-font-size * 3.1;
+        text-shadow: 0 4px 10px #AAA;
+        text-align: center;
+        font-weight: 800;
+        .oan{
+            color: $oan;
+        }
+        .aff{
+            color: $aff;
+        }
+        .error{
+            color: #333;
+        }
+    }
+
+    h3 {
+        text-align: center;
+        font-style: italic;
+        padding-top: 30px;
+    }
+
+    p {
+        color: #888;
+        font-style: italic;
+        text-align: justify;
+        font-weight: 300;
+        line-height: 25px;
+        
+        sup a{
+            color: $aff;
+        }
+
+        &.definition {
+            padding-top: 50px;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+    }
+}
+
+.map {
+    border-right: 1px solid #eee;
+    margin-bottom: 20px;
+
+    .btn {
+        width: 100%;
+    }
+
+    #btnMaps {
+        display: none;
+    }
+    
+    .canvas {
+
+        @include aspect-ratio(1164, 1530);
+        > .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        border: 1px solid #EEE;
+        background: #fff url('../img/wallpaper.png') repeat;
+        cursor: pointer;
+
+        img{
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #map_weather{
+            display: none;
+        }  
+
+        #btnMaps:checked + label > img#map_clothing{
+            content: url(/map/weather);
+        }   
+    }
+}
+
+
+.forecast {
+    background: #fafafa;
+    padding-bottom: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+
+    h3 {
+        margin-bottom: 20px;
+        color: #444;
+    }
+    
+    .day {
+        background: white;
+        border: 1px solid #eee;
+
+        img {
+            background: white;
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 10px;
+        }
+
+        .name {
+            font-weight: 600;
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;        
+        }
+
+        .stats {
+            font-size: 10pt;
+            margin-top: 5px;
+            margin-bottom: 10px;
+
+            .temp_low,
+            .temp_high {
+                display: inline-block;
+            }
+
+            .temp_low {
+                font-weight: 600;
+                color: #666;
+                padding-right: 4px;
+            }
+    
+            .temp_high {
+                font-weight: 900;
+                padding-left: 4px;
+            }        
+        }
+        
+        .description {
+            display: block;
+            border-top: 1px solid #eee;
+            width: 100%;
+            margin-top: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    }
+}
+
+.location {
+    background: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-style: italic;
+    border-top: 1px solid #eee;
+    padding-bottom: 30px;
+
+    h2 {
+        font-weight: 600;
+    }
+
+    input{
+        width: 100%;
+        text-align: center;
+        padding: 9px 0px 4px 0px;
+        font-size: 20px;
+        line-height: 36px;
+        height: 53px;
+        border-radius: 0px;
+        outline: none;
+        border: none;
+        padding: 0;
+        background-color: #fff;
+        border: 1px solid #EEE;
+        margin-top: 10px;
+        font-style: italic;
+      }
+}
+
+.footer {
+    color: white;
+    padding-top: 40px;
+    font-size: 18px;
+    background: linear-gradient(to bottom, #333333 0%,#555555 77%);
+    margin-bottom: 20px;
+
+    p {
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+
+    .links {
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .tight-md {
+        padding-right: 2px;
+        padding-left: 2px;
+
+        .day {
+            .name,
+            .description {
+                font-size: 0.8rem;
+            }
+        }
+
+        h3 {
+            padding-left: 15px;
+        }
+    }
+}
