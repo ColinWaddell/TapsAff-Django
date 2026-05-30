@@ -49,7 +49,7 @@ class Map(View):
                 "icons": map_icons,
                 "width": icons.C_WIDTH,
                 "height": icons.C_HEIGHT,
-            })
+            }).content.decode()
 
         map_data = cache.get_or_set(
             cache_key, _build_map, timeout=settings.CACHE_MAP_TIMEOUT,
