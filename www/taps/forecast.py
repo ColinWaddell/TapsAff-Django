@@ -181,6 +181,8 @@ def query(location_request=None, location_default="Glasgow"):
     if both lookups fail, the packet's `place_error` field is set so
     callers can render a graceful message instead of getting a 500.
     """
+    if location_request:
+        location_request = location_request.strip()
     packet = _build_packet()
 
     if location_request:

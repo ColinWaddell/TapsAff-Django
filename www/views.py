@@ -12,6 +12,8 @@ from .taps import forecast
 class Index(View):
     def get(self, request, location=None):
         # Resolve requested location, falling back to session then default.
+        if location:
+            location = location.strip()
         if not location:
             location = request.session.get("location")
 
@@ -24,15 +26,16 @@ class Index(View):
         })
 
     def post(self, request):
-        location = request.POST["location"]
+        location = request.POST.get("location", "").strip()
         return redirect("www:index", location=location)
 
 
 class Api(View):
     def get(self, request, location=None):
-        if not location:
+        if not location or not location.strip():
             return JsonResponse({"error": "location not supplied"})
 
+        location = location.strip()
         data = forecast.query(location)
         if data.get("place_error"):
             return JsonResponse({"error": data["place_error"]})
