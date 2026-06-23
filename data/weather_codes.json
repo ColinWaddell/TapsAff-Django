@@ -1,5 +1,33 @@
 [
     {
+      "model": "www.weathericon",
+      "pk": 24,
+      "fields": {
+        "icon": "wind_cloud"
+      }
+    },
+    {
+      "model": "www.weathericon",
+      "pk": 25,
+      "fields": {
+        "icon": "cloud_wind_sun"
+      }
+    },
+    {
+      "model": "www.weathericon",
+      "pk": 26,
+      "fields": {
+        "icon": "icy"
+      }
+    },
+    {
+      "model": "www.weathericon",
+      "pk": 27,
+      "fields": {
+        "icon": "temp_mid"
+      }
+    },
+    {
       "model": "www.weather",
       "pk": 49,
       "fields": {
@@ -87,6 +115,132 @@
       "model": "www.weather",
       "pk": 53,
       "fields": {
+        "code": 1012,
+        "description": "Haze",
+        "scots": "Hazy",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 16,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 24,
+        "weather_night": 24
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 54,
+      "fields": {
+        "code": 1015,
+        "description": "Dust haze",
+        "scots": "Hazy",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 16,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 24,
+        "weather_night": 24
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 55,
+      "fields": {
+        "code": 1018,
+        "description": "Blowing dust",
+        "scots": "Blawin",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 16,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 19,
+        "weather_night": 19
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 56,
+      "fields": {
+        "code": 1021,
+        "description": "Dust storm",
+        "scots": "Stoiter",
+        "terrible": true,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 1,
+        "clothing_fair": 2,
+        "clothing_warm": 2,
+        "weather_day": 19,
+        "weather_night": 19
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 57,
+      "fields": {
+        "code": 1024,
+        "description": "Sandstorm",
+        "scots": "Stoiter",
+        "terrible": true,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 1,
+        "clothing_fair": 2,
+        "clothing_warm": 2,
+        "weather_day": 19,
+        "weather_night": 19
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 58,
+      "fields": {
+        "code": 1027,
+        "description": "Severe sandstorm",
+        "scots": "Radge",
+        "terrible": true,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 1,
+        "clothing_fair": 1,
+        "clothing_warm": 2,
+        "weather_day": 19,
+        "weather_night": 19
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 59,
+      "fields": {
         "code": 1030,
         "description": "Mist",
         "scots": "Misty",
@@ -106,7 +260,133 @@
     },
     {
       "model": "www.weather",
-      "pk": 54,
+      "pk": 60,
+      "fields": {
+        "code": 1033,
+        "description": "Smoke",
+        "scots": "Smoky",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 16,
+        "weather_night": 16
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 61,
+      "fields": {
+        "code": 1036,
+        "description": "Smoky haze",
+        "scots": "Smoky",
+        "terrible": true,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 1,
+        "clothing_fair": 2,
+        "clothing_warm": 2,
+        "weather_day": 24,
+        "weather_night": 24
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 62,
+      "fields": {
+        "code": 1039,
+        "description": "Smog",
+        "scots": "Smog",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 16,
+        "weather_night": 16
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 63,
+      "fields": {
+        "code": 1042,
+        "description": "Severe smog",
+        "scots": "Dreich",
+        "terrible": true,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 18,
+        "clothing_colder": 1,
+        "clothing_cold": 1,
+        "clothing_fair": 2,
+        "clothing_warm": 2,
+        "weather_day": 16,
+        "weather_night": 16
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 64,
+      "fields": {
+        "code": 1045,
+        "description": "Saharan dust",
+        "scots": "Saharan",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 16,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 24,
+        "weather_night": 24
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 65,
+      "fields": {
+        "code": 1048,
+        "description": "Dust",
+        "scots": "Drosty",
+        "terrible": false,
+        "delta": 0,
+        "colder": -273.15,
+        "cold": 5,
+        "fair": 13,
+        "warm": 16,
+        "clothing_colder": 1,
+        "clothing_cold": 2,
+        "clothing_fair": 3,
+        "clothing_warm": 3,
+        "weather_day": 19,
+        "weather_night": 19
+      }
+    },
+    {
+      "model": "www.weather",
+      "pk": 66,
       "fields": {
         "code": 1063,
         "description": "Patchy rain possible",
@@ -127,11 +407,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 55,
+      "pk": 67,
       "fields": {
         "code": 1066,
         "description": "Patchy snow possible",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -148,11 +428,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 56,
+      "pk": 68,
       "fields": {
         "code": 1069,
         "description": "Patchy sleet possible",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -169,7 +449,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 57,
+      "pk": 69,
       "fields": {
         "code": 1072,
         "description": "Patchy freezing drizzle possible",
@@ -190,11 +470,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 58,
+      "pk": 70,
       "fields": {
         "code": 1087,
         "description": "Thundery outbreaks possible",
-        "scots": "Hackit'",
+        "scots": "Hackit",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -211,11 +491,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 59,
+      "pk": 71,
       "fields": {
         "code": 1114,
         "description": "Blowing snow",
-        "scots": "Baltic",
+        "scots": "Blawin snaw",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -232,11 +512,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 60,
+      "pk": 72,
       "fields": {
         "code": 1117,
         "description": "Blizzard",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -253,7 +533,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 61,
+      "pk": 73,
       "fields": {
         "code": 1135,
         "description": "Fog",
@@ -274,7 +554,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 62,
+      "pk": 74,
       "fields": {
         "code": 1147,
         "description": "Freezing fog",
@@ -295,7 +575,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 63,
+      "pk": 75,
       "fields": {
         "code": 1150,
         "description": "Patchy light drizzle",
@@ -316,7 +596,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 64,
+      "pk": 76,
       "fields": {
         "code": 1153,
         "description": "Light drizzle",
@@ -337,7 +617,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 65,
+      "pk": 77,
       "fields": {
         "code": 1168,
         "description": "Freezing drizzle",
@@ -358,7 +638,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 66,
+      "pk": 78,
       "fields": {
         "code": 1171,
         "description": "Heavy freezing drizzle",
@@ -379,7 +659,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 67,
+      "pk": 79,
       "fields": {
         "code": 1180,
         "description": "Patchy light rain",
@@ -400,7 +680,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 68,
+      "pk": 80,
       "fields": {
         "code": 1183,
         "description": "Light rain",
@@ -421,7 +701,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 69,
+      "pk": 81,
       "fields": {
         "code": 1186,
         "description": "Moderate rain at times",
@@ -442,7 +722,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 70,
+      "pk": 82,
       "fields": {
         "code": 1189,
         "description": "Moderate rain",
@@ -463,7 +743,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 71,
+      "pk": 83,
       "fields": {
         "code": 1192,
         "description": "Heavy rain at times",
@@ -484,7 +764,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 72,
+      "pk": 84,
       "fields": {
         "code": 1195,
         "description": "Heavy rain",
@@ -505,7 +785,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 73,
+      "pk": 85,
       "fields": {
         "code": 1198,
         "description": "Light freezing rain",
@@ -526,7 +806,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 74,
+      "pk": 86,
       "fields": {
         "code": 1201,
         "description": "Moderate or heavy freezing rain",
@@ -547,7 +827,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 75,
+      "pk": 87,
       "fields": {
         "code": 1204,
         "description": "Light sleet",
@@ -568,11 +848,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 76,
+      "pk": 88,
       "fields": {
         "code": 1207,
         "description": "Moderate or heavy sleet",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -589,11 +869,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 77,
+      "pk": 89,
       "fields": {
         "code": 1210,
         "description": "Patchy light snow",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -610,11 +890,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 78,
+      "pk": 90,
       "fields": {
         "code": 1213,
         "description": "Light snow",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -631,11 +911,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 79,
+      "pk": 91,
       "fields": {
         "code": 1216,
         "description": "Patchy moderate snow",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -652,11 +932,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 80,
+      "pk": 92,
       "fields": {
         "code": 1219,
         "description": "Moderate snow",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -673,11 +953,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 81,
+      "pk": 93,
       "fields": {
         "code": 1222,
         "description": "Patchy heavy snow",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -694,11 +974,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 82,
+      "pk": 94,
       "fields": {
         "code": 1225,
         "description": "Heavy snow",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -715,11 +995,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 83,
+      "pk": 95,
       "fields": {
         "code": 1237,
         "description": "Ice pellets",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -736,7 +1016,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 84,
+      "pk": 96,
       "fields": {
         "code": 1240,
         "description": "Light rain shower",
@@ -757,7 +1037,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 85,
+      "pk": 97,
       "fields": {
         "code": 1243,
         "description": "Moderate or heavy rain shower",
@@ -778,7 +1058,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 86,
+      "pk": 98,
       "fields": {
         "code": 1246,
         "description": "Torrential rain shower",
@@ -799,11 +1079,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 87,
+      "pk": 99,
       "fields": {
         "code": 1249,
         "description": "Light sleet showers",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -820,11 +1100,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 88,
+      "pk": 100,
       "fields": {
         "code": 1252,
         "description": "Moderate or heavy sleet showers",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -841,7 +1121,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 89,
+      "pk": 101,
       "fields": {
         "code": 1255,
         "description": "Light snow showers",
@@ -862,11 +1142,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 90,
+      "pk": 102,
       "fields": {
         "code": 1258,
         "description": "Moderate or heavy snow showers",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -883,7 +1163,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 91,
+      "pk": 103,
       "fields": {
         "code": 1261,
         "description": "Light showers of ice pellets",
@@ -904,7 +1184,7 @@
     },
     {
       "model": "www.weather",
-      "pk": 92,
+      "pk": 104,
       "fields": {
         "code": 1264,
         "description": "Moderate or heavy showers of ice pellets",
@@ -925,11 +1205,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 93,
+      "pk": 105,
       "fields": {
         "code": 1273,
         "description": "Patchy light rain with thunder",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -946,11 +1226,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 94,
+      "pk": 106,
       "fields": {
         "code": 1276,
         "description": "Moderate or heavy rain with thunder",
-        "scots": "Boggin'",
+        "scots": "Boggin",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -967,11 +1247,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 95,
+      "pk": 107,
       "fields": {
         "code": 1279,
         "description": "Patchy light snow with thunder",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -988,11 +1268,11 @@
     },
     {
       "model": "www.weather",
-      "pk": 96,
+      "pk": 108,
       "fields": {
         "code": 1282,
         "description": "Moderate or heavy snow with thunder",
-        "scots": "Baltic'",
+        "scots": "Baltic",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -1006,26 +1286,5 @@
         "weather_day": 11,
         "weather_night": 13
       }
-    },
-    {
-      "model": "www.weather",
-      "pk": 97,
-      "fields": {
-        "code": 1036,
-        "description": "Blowing snow",
-        "scots": "Blawin snaw'",
-        "terrible": true,
-        "delta": 0,
-        "colder": -273.15,
-        "cold": 5,
-        "fair": 13,
-        "warm": 18,
-        "clothing_colder": 1,
-        "clothing_cold": 1,
-        "clothing_fair": 1,
-        "clothing_warm": 2,
-        "weather_day": 1,
-        "weather_night": 1
-      }
     }
-  ]
+]
