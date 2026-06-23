@@ -2,6 +2,7 @@ from urllib.error import HTTPError
 
 from django.conf import settings
 from django.core.cache import cache
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.timezone import datetime
 
 from www.models import Settings, Weather
@@ -93,7 +94,11 @@ def _test_taps_aff(code, temp_f, daytime):
 
     if not Weather.objects.filter(code=code, terrible=True) and daytime:
         config = Settings.current()
-        delta = Weather.objects.get(code=code).delta
+        try:
+            delta = Weather.objects.get(code=code).delta
+        except ObjectDoesNotExist:
+            # Unknown weather code — treat as neutral (no delta adjustment)
+            delta = 0
         threshold = config.threshold + delta
         if temp_f >= threshold:
             taps["status"] = AFF
@@ -104,8 +109,11 @@ def _test_taps_aff(code, temp_f, daytime):
 
 
 def _get_description(code):
-    weather = Weather.objects.get(code=int(code))
-    return {"english": weather.description, "scots": weather.scots}
+    try:
+        weather = Weather.objects.get(code=int(code))
+        return {"english": weather.description, "scots": weather.scots}
+    except ObjectDoesNotExist:
+        return {"english": "Unknown", "scots": "Unkent"}
 
 
 def _build_packet():
