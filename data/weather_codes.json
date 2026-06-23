@@ -180,7 +180,7 @@
       "fields": {
         "code": 1021,
         "description": "Dust storm",
-        "scots": "Stoiter",
+        "scots": "Radge",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
@@ -201,7 +201,7 @@
       "fields": {
         "code": 1024,
         "description": "Sandstorm",
-        "scots": "Stoiter",
+        "scots": "Radge",
         "terrible": true,
         "delta": 0,
         "colder": -273.15,
